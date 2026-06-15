@@ -52,26 +52,98 @@
   .match .sc { font-weight:bold; color:#cbd5e1; background:rgba(2,6,23,.5); border-radius:5px; padding:1px 8px; }
   .meta { display:flex; align-items:center; gap:8px; } .meta .win { color:var(--emd); font-weight:bold; } .meta .draw { color:var(--amd); font-weight:bold; }
   .meta .rnd { font-size:10px; color:var(--mut2); text-transform:uppercase; letter-spacing:.06em; }
+  .report { border:1px solid var(--bd); background:var(--card); border-radius:10px; padding:16px 20px 20px; margin-bottom:34px; }
+  .report h3 { font-size:13px; color:var(--amd); margin:18px 0 6px; letter-spacing:.03em; text-transform:none; }
+  .report p { font-size:13px; line-height:1.7; color:#cbd5e1; margin:0 0 6px; }
+  .report .lede { font-size:14px; line-height:1.75; color:var(--tx); border-left:3px solid var(--em); padding-left:14px; margin:4px 0 6px; }
+  .report .name { color:var(--tx); font-weight:bold; }
+  .report .good { color:var(--emd); font-weight:bold; }
+  .report .bad { color:#fda4af; font-weight:bold; }
+  .report .team { color:var(--amd); }
   footer { margin-top:36px; border-top:1px solid var(--bd); padding-top:18px; font-size:11px; color:var(--mut2); line-height:1.6; }
 </style></head>
 <body><div class="wrap">
   <header>
     <div class="kicker">Live Standings · Built from the shared ledger</div>
     <h1>⚽ World Cup <span class="em">2026</span> · Office Sweepstakes</h1>
-    <div class="sub">Standings as of <b>Friday 12 June 2026</b> — replayed from <b>trades.txt</b> (33 trades, 2 results).
+    <div class="sub">Standings as of <b>Monday 15 June 2026</b> — replayed from <b>trades.txt</b> (36 trades, 12 results).
       Scoring <b>Win 2 · Draw 1 · Loss 0</b> (a penalty win counts as a win). Points are banked to whoever <b>holds a team when its result is recorded</b> and stay with them through any later trade. <b>Total = match points + cash bank.</b></div>
   </header>
   <div class="tiles">
-    <div class="tile"><div class="big em">7.69</div><div class="lab">Pak leads</div><div class="sm">0 pts + 7.69 cash · next 6.53</div></div>
-    <div class="tile"><div class="big am">8</div><div class="lab">manager points banked</div><div class="sm">across 2 results so far</div></div>
-    <div class="tile"><div class="big em">2</div><div class="lab">matches logged</div><div class="sm">Win 2 · Draw 1 · Loss 0</div></div>
-    <div class="tile"><div class="big am">33</div><div class="lab">trades logged</div><div class="sm">2 managers on the board</div></div>
+    <div class="tile"><div class="big em">12.32</div><div class="lab">Paulius leads</div><div class="sm">9 pts + 3.32 cash · next 9.26</div></div>
+    <div class="tile"><div class="big am">48</div><div class="lab">manager points banked</div><div class="sm">across 12 results so far</div></div>
+    <div class="tile"><div class="big em">12</div><div class="lab">matches logged</div><div class="sm">Win 2 · Draw 1 · Loss 0</div></div>
+    <div class="tile"><div class="big am">36</div><div class="lab">trades logged</div><div class="sm">14 managers on the board</div></div>
   </div>
+  
+  <section class="report">
+    <h2>📰 Market report · matchday 1 (half gone)</h2>
+    <p class="lede">Twelve games in and the board has its first real shape. <b class="name">Paulius</b> — who fired off <b>26 of the 36 trades</b> on the ledger — has turned a pre-tournament buying spree into a commanding lead on <b class="good">12.32</b>, more than three clear of the field. But the opening round has been anything but chalk: favourites are dropping points all over the park, and a couple of genuine smash-and-grabs have rewarded the brave.</p>
+
+    <h3>😱 Upsets &amp; favourite stumbles</h3>
+    <p><b class="team">Australia 2–0 Turkey</b> is the shock of the round — the Socceroos (EV 2.56) dismantling a Turkey side rated more than two points higher. <b class="name">Simon</b>, who bought Australia from Paulius for 2.33 <em>just before kickoff</em>, and <b class="name">Margot</b> each bank <b class="good">+2</b>; <b class="name">Mike</b>, sitting on <b>two</b> Turkey shares, gets nothing. <b class="team">Ivory Coast 1–0 Ecuador</b> is the other outright upset, and it is the single best result of the round for one manager: <b class="name">Jing</b> doubled down on Ivory Coast pre-tournament and his two shares return <b class="good">+4</b>.</p>
+    <p>The big names, meanwhile, keep tripping over the minnows. <b class="team">Switzerland</b> (EV 7.06) could only draw with <b class="team">Qatar</b> — a 5.8-EV mismatch on paper — handing <b class="name">Mike</b>'s two Qatar shares a soft +2. <b class="team">Brazil</b> were held by <b class="team">Morocco</b> (a tidy +2 for <b class="name">Tim</b>'s two Morocco shares), <b class="team">Netherlands</b> drew 2–2 with <b class="team">Japan</b>, and <b class="team">Canada</b> were pegged back by <b class="team">Bosnia</b> — that last one worth +2 to runner-up <b class="name">May</b>.</p>
+
+    <h3>🏆 Big winners</h3>
+    <p><b class="name">Paulius</b> leads the points table too (<b class="good">9</b>): Mexico ×2 (+4), Scotland (+2), plus South Korea and Canada. <b class="name">Jing</b> (7) is the value play of the tournament so far — Ivory Coast, Scotland and Switzerland all paying off a small, concentrated book. <b class="name">Elaine</b> (5) cornered <b>both</b> Sweden shares from Paulius and cashed in when they thrashed Tunisia 5–1 (+4). <b class="name">Simon</b> (5) timed the Australia buy to perfection, and <b class="name">May</b> (4) — who swapped Spain for Germany <em>plus</em> cash before kickoff — looks shrewd after Germany put seven past Curaçao.</p>
+
+    <h3>📉 Big losers</h3>
+    <p><b class="name">Mike</b> is the hard-luck story: two Turkey shares torpedoed by the Australia upset, salvaged only by Qatar's surprise point. <b class="name">Kerrill</b> props up the table on <b class="bad">0.86</b> — he paid 4.20 for Colombia and has yet to register a single point. <b class="name">Josh</b> (23rd) traded Spain away on day one and is left with a thin, low-EV book; his Tunisia were on the wrong end of the Sweden rout. The lesson of the round: an expensive squad is worth nothing until it actually plays.</p>
+
+    <h3>🔮 What's coming</h3>
+    <p><b>The heavyweights have not kicked a ball yet.</b> <b class="team">Spain, France, England, Argentina, Belgium</b> and <b class="team">Portugal</b> all play their openers on the next matchday — and that is where the table could be torn up. Watch <b class="name">Neil</b> (two England shares, currently 19th), <b class="name">Kwan</b> (two Portugal shares, 21st) and <b class="name">Kerrill</b> (two Colombia shares + Uruguay, dead last) — each a single big result from rocketing up the board. <b class="name">Pak</b> is the sleeper: 4th on a <b>fat 7.69 cash pile and zero points</b>, with Belgium and Norway still to come. Spain is split between <b class="name">Divisha</b> and <b class="name">Rohit</b>; Argentina between <b class="name">Dea</b> and <b class="name">Tim</b>.</p>
+
+    <h3>💬 Market chatter</h3>
+    <p>The trading window was Paulius's playground — 26 of 36 deals, with nearly <b>47</b> in cash changing hands across the ledger. The biggest single cheque was <b class="name">Kerrill</b>'s 4.20 to Paulius for Colombia, a bet still waiting to pay off. Two flips already look pivotal: Paulius selling both Sweden shares to Elaine (who promptly collected +4), and offloading Australia to Simon hours before the Turkey upset. With matchday 1 only half complete and every elite side still to debut, expect the deal-makers to keep the ledger busy.</p>
+  </section>
+
   <h2>📊 Standings · ranked by total (match points + cash)</h2>
   <div class="grid">
     <div class="card leader">
       <div class="chead">
-        <span class="pname">👑 Pak</span>
+        <span class="pname">👑 Paulius</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>12.32</b></span>
+      </div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇲🇽</span><span class="nm">Mexico</span><span class="mult">×2</span><span class="rec">1W 0D 0L</span><span class="pts">4 pts</span></span><span class="chip rose"><span class="fl">🇨🇦</span><span class="nm">Canada</span><span class="rec">0W 1D 0L</span><span class="pts">1 pt</span></span><span class="chip violet"><span class="fl">🇰🇷</span><span class="nm">South Korea</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip violet"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="nm">Scotland</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip violet"><span class="fl">🇬🇭</span><span class="nm">Ghana</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">9</b></div>
+        
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.32</b></div>
+        <div class="frow sum"><span>9 pts + 3.32 cash</span><b>= 12.32</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#2 May</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>9.26</b></span>
+      </div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇩🇪</span><span class="nm">Germany</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip violet"><span class="fl">🇧🇦</span><span class="nm">Bosnia &amp; H.</span><span class="mult">×2</span><span class="rec">0W 1D 0L</span><span class="pts">2 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">4</b></div>
+        
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>5.26</b></div>
+        <div class="frow sum"><span>4 pts + 5.26 cash</span><b>= 9.26</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#3 Jing</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>8.05</b></span>
+      </div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇨🇭</span><span class="nm">Switzerland</span><span class="rec">0W 1D 0L</span><span class="pts">1 pt</span></span><span class="chip rose"><span class="fl">🇨🇮</span><span class="nm">Ivory Coast</span><span class="mult">×2</span><span class="rec">1W 0D 0L</span><span class="pts">4 pts</span></span><span class="chip violet"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="nm">Scotland</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">7</b></div>
+        
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>1.05</b></div>
+        <div class="frow sum"><span>7 pts + 1.05 cash</span><b>= 8.05</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#4 Pak</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>7.69</b></span>
       </div>
       <div class="chips"><span class="chip amber"><span class="fl">🇧🇪</span><span class="nm">Belgium</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇳🇴</span><span class="nm">Norway</span><span class="pts pts0">0 pts</span></span></div>
@@ -85,24 +157,52 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#2 Paulius</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>6.53</b></span>
+        <span class="pname">#5 Matt</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>6.52</b></span>
       </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="nm">England</span><span class="pts pts0">0 pts</span></span><span class="chip amber"><span class="fl">🇲🇽</span><span class="nm">Mexico</span><span class="mult">×2</span><span class="rec">1W 0D 0L</span><span class="pts">4 pts</span></span><span class="chip violet"><span class="fl">🇰🇷</span><span class="nm">South Korea</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip violet"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="nm">Scotland</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇬🇭</span><span class="nm">Ghana</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇩🇪</span><span class="nm">Germany</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip rose"><span class="fl">🇯🇵</span><span class="nm">Japan</span><span class="rec">0W 1D 0L</span><span class="pts">1 pt</span></span><span class="chip violet"><span class="fl">🇿🇦</span><span class="nm">South Africa</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇳🇿</span><span class="nm">New Zealand</span><span class="pts pts0">0 pts</span></span></div>
       <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">6</b></div>
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">3</b></div>
         
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>0.53</b></div>
-        <div class="frow sum"><span>6 pts + 0.53 cash</span><b>= 6.53</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.52</b></div>
+        <div class="frow sum"><span>3 pts + 3.52 cash</span><b>= 6.52</b></div>
       </div>
     </div>
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#3 Michael</span>
+        <span class="pname">#6 Margot</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>6.25</b></span>
+      </div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇧🇪</span><span class="nm">Belgium</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇪🇨</span><span class="nm">Ecuador</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇦🇺</span><span class="nm">Australia</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip emerald"><span class="fl">🇨🇼</span><span class="nm">Curaçao</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">2</b></div>
+        
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>4.25</b></div>
+        <div class="frow sum"><span>2 pts + 4.25 cash</span><b>= 6.25</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#7 Mike</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>5.78</b></span>
+      </div>
+      <div class="chips"><span class="chip rose"><span class="fl">🇹🇷</span><span class="nm">Turkey</span><span class="mult">×2</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇿🇦</span><span class="nm">South Africa</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇶🇦</span><span class="nm">Qatar</span><span class="mult">×2</span><span class="rec">0W 1D 0L</span><span class="pts">2 pts</span></span><span class="chip emerald"><span class="fl">🇮🇶</span><span class="nm">Iraq</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">2</b></div>
+        
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.78</b></div>
+        <div class="frow sum"><span>2 pts + 3.78 cash</span><b>= 5.78</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#8 Michael</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>5.65</b></span>
       </div>
-      <div class="chips"><span class="chip violet"><span class="fl">🇵🇾</span><span class="nm">Paraguay</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇺🇿</span><span class="nm">Uzbekistan</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇸🇦</span><span class="nm">Saudi Arabia</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="chips"><span class="chip violet"><span class="fl">🇵🇾</span><span class="nm">Paraguay</span><span class="mult">×2</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇺🇿</span><span class="nm">Uzbekistan</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇸🇦</span><span class="nm">Saudi Arabia</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
         
@@ -113,35 +213,63 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#4 May</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>5.26</b></span>
+        <span class="pname">#9 AJ</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>5.47</b></span>
       </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇩🇪</span><span class="nm">Germany</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇧🇦</span><span class="nm">Bosnia &amp; H.</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇳🇱</span><span class="nm">Netherlands</span><span class="mult">×2</span><span class="rec">0W 1D 0L</span><span class="pts">2 pts</span></span><span class="chip emerald"><span class="fl">🇭🇹</span><span class="nm">Haiti</span><span class="mult">×2</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span></div>
       <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">2</b></div>
         
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>5.26</b></div>
-        <div class="frow sum"><span>0 pts + 5.26 cash</span><b>= 5.26</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.47</b></div>
+        <div class="frow sum"><span>2 pts + 3.47 cash</span><b>= 5.47</b></div>
       </div>
     </div>
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#5 Mike</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>4.74</b></span>
+        <span class="pname">=#10 Simon</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>5.00</b></span>
       </div>
-      <div class="chips"><span class="chip rose"><span class="fl">🇹🇷</span><span class="nm">Turkey</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇿🇦</span><span class="nm">South Africa</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇶🇦</span><span class="nm">Qatar</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇮🇶</span><span class="nm">Iraq</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇨🇭</span><span class="nm">Switzerland</span><span class="rec">0W 1D 0L</span><span class="pts">1 pt</span></span><span class="chip rose"><span class="fl">🇺🇾</span><span class="nm">Uruguay</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇰🇷</span><span class="nm">South Korea</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip violet"><span class="fl">🇦🇺</span><span class="nm">Australia</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip emerald"><span class="fl">🇵🇦</span><span class="nm">Panama</span><span class="pts pts0">0 pts</span></span></div>
       <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">5</b></div>
         
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>4.74</b></div>
-        <div class="frow sum"><span>0 pts + 4.74 cash</span><b>= 4.74</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>0.00</b></div>
+        <div class="frow sum"><span>5 pts + 0.00 cash</span><b>= 5.00</b></div>
       </div>
     </div>
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#6 Haydee</span>
+        <span class="pname">=#10 Elaine</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>5.00</b></span>
+      </div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇧🇷</span><span class="nm">Brazil</span><span class="rec">0W 1D 0L</span><span class="pts">1 pt</span></span><span class="chip rose"><span class="fl">🇭🇷</span><span class="nm">Croatia</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇸🇪</span><span class="nm">Sweden</span><span class="mult">×2</span><span class="rec">1W 0D 0L</span><span class="pts">4 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">5</b></div>
+        
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>0.00</b></div>
+        <div class="frow sum"><span>5 pts + 0.00 cash</span><b>= 5.00</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#12 Echo</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>4.93</b></span>
+      </div>
+      <div class="chips"><span class="chip rose"><span class="fl">🇨🇦</span><span class="nm">Canada</span><span class="rec">0W 1D 0L</span><span class="pts">1 pt</span></span><span class="chip rose"><span class="fl">🇺🇸</span><span class="nm">USA</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip violet"><span class="fl">🇩🇿</span><span class="nm">Algeria</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">3</b></div>
+        
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>1.93</b></div>
+        <div class="frow sum"><span>3 pts + 1.93 cash</span><b>= 4.93</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#13 Haydee</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>4.50</b></span>
       </div>
       <div class="chips"><span class="chip rose"><span class="fl">🇪🇬</span><span class="nm">Egypt</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇨🇿</span><span class="nm">Czechia</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇨🇩</span><span class="nm">DR Congo</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
@@ -155,35 +283,49 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#7 Simon</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>4.33</b></span>
+        <span class="pname">#14 Divisha</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>4.23</b></span>
       </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇨🇭</span><span class="nm">Switzerland</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇺🇾</span><span class="nm">Uruguay</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇰🇷</span><span class="nm">South Korea</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip emerald"><span class="fl">🇵🇦</span><span class="nm">Panama</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇪🇸</span><span class="nm">Spain</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇺🇸</span><span class="nm">USA</span><span class="rec">1W 0D 0L</span><span class="pts">2 pts</span></span><span class="chip emerald"><span class="fl">🇨🇻</span><span class="nm">Cape Verde</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">2</b></div>
         
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>2.33</b></div>
-        <div class="frow sum"><span>2 pts + 2.33 cash</span><b>= 4.33</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>2.23</b></div>
+        <div class="frow sum"><span>2 pts + 2.23 cash</span><b>= 4.23</b></div>
       </div>
     </div>
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#8 Margot</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>4.25</b></span>
+        <span class="pname">#15 Kelvin</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>3.91</b></span>
       </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇧🇪</span><span class="nm">Belgium</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇪🇨</span><span class="nm">Ecuador</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇦🇺</span><span class="nm">Australia</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇨🇼</span><span class="nm">Curaçao</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇫🇷</span><span class="nm">France</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇪🇨</span><span class="nm">Ecuador</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇯🇵</span><span class="nm">Japan</span><span class="rec">0W 1D 0L</span><span class="pts">1 pt</span></span></div>
       <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">1</b></div>
         
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>4.25</b></div>
-        <div class="frow sum"><span>0 pts + 4.25 cash</span><b>= 4.25</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>2.91</b></div>
+        <div class="frow sum"><span>1 pts + 2.91 cash</span><b>= 3.91</b></div>
       </div>
     </div>
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#9 Dea</span>
+        <span class="pname">#16 Tim</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>3.85</b></span>
+      </div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇦🇷</span><span class="nm">Argentina</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇲🇦</span><span class="nm">Morocco</span><span class="mult">×2</span><span class="rec">0W 1D 0L</span><span class="pts">2 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">2</b></div>
+        
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>1.85</b></div>
+        <div class="frow sum"><span>2 pts + 1.85 cash</span><b>= 3.85</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#17 Dea</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>3.83</b></span>
       </div>
       <div class="chips"><span class="chip amber"><span class="fl">🇦🇷</span><span class="nm">Argentina</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇭🇷</span><span class="nm">Croatia</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇨🇿</span><span class="nm">Czechia</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span></div>
@@ -197,7 +339,7 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#10 Rohit</span>
+        <span class="pname">#18 Rohit</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>3.78</b></span>
       </div>
       <div class="chips"><span class="chip amber"><span class="fl">🇪🇸</span><span class="nm">Spain</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇳🇴</span><span class="nm">Norway</span><span class="pts pts0">0 pts</span></span></div>
@@ -211,49 +353,35 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#11 Matt</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>3.52</b></span>
+        <span class="pname">#19 Neil</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>3.76</b></span>
       </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇩🇪</span><span class="nm">Germany</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇯🇵</span><span class="nm">Japan</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇿🇦</span><span class="nm">South Africa</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇳🇿</span><span class="nm">New Zealand</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="nm">England</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
         
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.52</b></div>
-        <div class="frow sum"><span>0 pts + 3.52 cash</span><b>= 3.52</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.76</b></div>
+        <div class="frow sum"><span>0 pts + 3.76 cash</span><b>= 3.76</b></div>
       </div>
     </div>
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#12 AJ</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>3.47</b></span>
+        <span class="pname">#20 CJ</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>3.60</b></span>
       </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇳🇱</span><span class="nm">Netherlands</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇭🇹</span><span class="nm">Haiti</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇧🇷</span><span class="nm">Brazil</span><span class="rec">0W 1D 0L</span><span class="pts">1 pt</span></span><span class="chip rose"><span class="fl">🇦🇹</span><span class="nm">Austria</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇬🇭</span><span class="nm">Ghana</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇳🇿</span><span class="nm">New Zealand</span><span class="pts pts0">0 pts</span></span></div>
       <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">1</b></div>
         
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.47</b></div>
-        <div class="frow sum"><span>0 pts + 3.47 cash</span><b>= 3.47</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>2.60</b></div>
+        <div class="frow sum"><span>1 pts + 2.60 cash</span><b>= 3.60</b></div>
       </div>
     </div>
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#13 Neil</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>3.26</b></span>
-      </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="nm">England</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇨🇦</span><span class="nm">Canada</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇦🇺</span><span class="nm">Australia</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇮🇶</span><span class="nm">Iraq</span><span class="pts pts0">0 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
-        
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.26</b></div>
-        <div class="frow sum"><span>0 pts + 3.26 cash</span><b>= 3.26</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#14 Kwan</span>
+        <span class="pname">#21 Kwan</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>3.10</b></span>
       </div>
       <div class="chips"><span class="chip amber"><span class="fl">🇵🇹</span><span class="nm">Portugal</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
@@ -267,35 +395,7 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#15 Kelvin</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>2.91</b></span>
-      </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇫🇷</span><span class="nm">France</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇪🇨</span><span class="nm">Ecuador</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇯🇵</span><span class="nm">Japan</span><span class="pts pts0">0 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
-        
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>2.91</b></div>
-        <div class="frow sum"><span>0 pts + 2.91 cash</span><b>= 2.91</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#16 CJ</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>2.60</b></span>
-      </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇧🇷</span><span class="nm">Brazil</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇦🇹</span><span class="nm">Austria</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇬🇭</span><span class="nm">Ghana</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇳🇿</span><span class="nm">New Zealand</span><span class="pts pts0">0 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
-        
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>2.60</b></div>
-        <div class="frow sum"><span>0 pts + 2.60 cash</span><b>= 2.60</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#17 Giannis</span>
+        <span class="pname">#22 Giannis</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>2.44</b></span>
       </div>
       <div class="chips"><span class="chip amber"><span class="fl">🇫🇷</span><span class="nm">France</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇦🇹</span><span class="nm">Austria</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇸🇳</span><span class="nm">Senegal</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇵🇦</span><span class="nm">Panama</span><span class="pts pts0">0 pts</span></span></div>
@@ -309,52 +409,10 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#18 Divisha</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>2.23</b></span>
-      </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇪🇸</span><span class="nm">Spain</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇺🇸</span><span class="nm">USA</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇨🇻</span><span class="nm">Cape Verde</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
-        
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>2.23</b></div>
-        <div class="frow sum"><span>0 pts + 2.23 cash</span><b>= 2.23</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#19 Echo</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>1.93</b></span>
-      </div>
-      <div class="chips"><span class="chip rose"><span class="fl">🇨🇦</span><span class="nm">Canada</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇺🇸</span><span class="nm">USA</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇩🇿</span><span class="nm">Algeria</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
-        
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>1.93</b></div>
-        <div class="frow sum"><span>0 pts + 1.93 cash</span><b>= 1.93</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#20 Tim</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>1.85</b></span>
-      </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇦🇷</span><span class="nm">Argentina</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇲🇦</span><span class="nm">Morocco</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
-        
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>1.85</b></div>
-        <div class="frow sum"><span>0 pts + 1.85 cash</span><b>= 1.85</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#21 Josh</span>
+        <span class="pname">#23 Josh</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>1.70</b></span>
       </div>
-      <div class="chips"><span class="chip violet"><span class="fl">🇸🇳</span><span class="nm">Senegal</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇮🇷</span><span class="nm">Iran</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇹🇳</span><span class="nm">Tunisia</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇯🇴</span><span class="nm">Jordan</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="chips"><span class="chip violet"><span class="fl">🇸🇳</span><span class="nm">Senegal</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇮🇷</span><span class="nm">Iran</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇹🇳</span><span class="nm">Tunisia</span><span class="mult">×2</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇯🇴</span><span class="nm">Jordan</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
         
@@ -365,47 +423,39 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#22 Jing</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>1.05</b></span>
-      </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇨🇭</span><span class="nm">Switzerland</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇨🇮</span><span class="nm">Ivory Coast</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="nm">Scotland</span><span class="pts pts0">0 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
-        
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>1.05</b></div>
-        <div class="frow sum"><span>0 pts + 1.05 cash</span><b>= 1.05</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#23 Kerrill</span>
+        <span class="pname">#24 Kerrill</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>0.86</b></span>
       </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇨🇴</span><span class="nm">Colombia</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇺🇾</span><span class="nm">Uruguay</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇨🇼</span><span class="nm">Curaçao</span><span class="pts pts0">0 pts</span></span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇨🇴</span><span class="nm">Colombia</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇺🇾</span><span class="nm">Uruguay</span><span class="pts pts0">0 pts</span></span><span class="chip emerald"><span class="fl">🇨🇼</span><span class="nm">Curaçao</span><span class="rec">0W 0D 1L</span><span class="pts pts0">0 pts</span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
         
         <div class="frow cash"><span>💰 Cash (bank)</span><b>0.86</b></div>
         <div class="frow sum"><span>0 pts + 0.86 cash</span><b>= 0.86</b></div>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#24 Elaine</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>0.00</b></span>
-      </div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇧🇷</span><span class="nm">Brazil</span><span class="pts pts0">0 pts</span></span><span class="chip rose"><span class="fl">🇭🇷</span><span class="nm">Croatia</span><span class="pts pts0">0 pts</span></span><span class="chip violet"><span class="fl">🇸🇪</span><span class="nm">Sweden</span><span class="mult">×2</span><span class="pts pts0">0 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">0</b></div>
-        
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>0.00</b></div>
-        <div class="frow sum"><span>0 pts + 0.00 cash</span><b>= 0.00</b></div>
-      </div>
     </div></div>
   <h2>⚽ Results so far</h2>
-  <ul class='results'><li><span class="match"><span class="t">🇰🇷 South Korea</span>
+  <ul class='results'><li><span class="match"><span class="t">🇸🇪 Sweden</span>
+        <span class="sc">5–1</span><span class="t">🇹🇳 Tunisia</span></span>
+        <span class="meta"><span class="win">Sweden +2</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇨🇮 Ivory Coast</span>
+        <span class="sc">1–0</span><span class="t">🇪🇨 Ecuador</span></span>
+        <span class="meta"><span class="win">Ivory Coast +2</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇳🇱 Netherlands</span>
+        <span class="sc">2–2</span><span class="t">🇯🇵 Japan</span></span>
+        <span class="meta"><span class="draw">draw · +1 each</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇩🇪 Germany</span>
+        <span class="sc">7–1</span><span class="t">🇨🇼 Curaçao</span></span>
+        <span class="meta"><span class="win">Germany +2</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇦🇺 Australia</span>
+        <span class="sc">2–0</span><span class="t">🇹🇷 Turkey</span></span>
+        <span class="meta"><span class="win">Australia +2</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇭🇹 Haiti</span>
+        <span class="sc">0–1</span><span class="t">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland</span></span>
+        <span class="meta"><span class="win">Scotland +2</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇧🇷 Brazil</span>
+        <span class="sc">1–1</span><span class="t">🇲🇦 Morocco</span></span>
+        <span class="meta"><span class="draw">draw · +1 each</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇶🇦 Qatar</span>
+        <span class="sc">1–1</span><span class="t">🇨🇭 Switzerland</span></span>
+        <span class="meta"><span class="draw">draw · +1 each</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇺🇸 USA</span>
+        <span class="sc">4–1</span><span class="t">🇵🇾 Paraguay</span></span>
+        <span class="meta"><span class="win">USA +2</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇨🇦 Canada</span>
+        <span class="sc">1–1</span><span class="t">🇧🇦 Bosnia &amp; H.</span></span>
+        <span class="meta"><span class="draw">draw · +1 each</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇰🇷 South Korea</span>
         <span class="sc">2–1</span><span class="t">🇨🇿 Czechia</span></span>
         <span class="meta"><span class="win">South Korea +2</span><span class="rnd">Group</span></span></li><li><span class="match"><span class="t">🇲🇽 Mexico</span>
         <span class="sc">2–0</span><span class="t">🇿🇦 South Africa</span></span>
