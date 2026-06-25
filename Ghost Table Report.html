@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World Cup 2026 · The Ghost Table</title>
+<style>
+  :root {
+    --bg:#070b16; --bg2:#0a1020; --panel:rgba(16,23,43,.66); --bd:rgba(56,68,102,.42);
+    --ink:#e9eefb; --mut:#8c99b8; --mut2:#5c668a;
+    --ghost:#67e8f9; --ghost2:#a5f3fc; --ghostdim:rgba(103,232,249,.5);
+    --real:#fbbf24; --real2:#fde68a;
+    --up:#34d399; --up2:#6ee7b7; --dn:#fb7185; --dn2:#fda4af;
+    --mono:'Cascadia Code','Cascadia Mono',ui-monospace,'SF Mono','Courier New',monospace;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; color:var(--ink); font-family:var(--mono);
+    background:
+      radial-gradient(1100px 520px at 22% -8%, rgba(103,232,249,.10), transparent 60%),
+      radial-gradient(900px 480px at 92% 4%, rgba(251,191,36,.07), transparent 58%),
+      linear-gradient(180deg,#070b16,#080d1c 40%,#070b16);
+    padding:30px 18px 80px; font-variant-numeric:tabular-nums; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1120px; margin:0 auto; }
+  a { color:inherit; }
+
+  /* ---------- header / hero ---------- */
+  header { margin-bottom:30px; }
+  .kick { display:flex; flex-wrap:wrap; align-items:center; gap:10px; font-size:11px; letter-spacing:.26em;
+    text-transform:uppercase; color:var(--mut2); }
+  .sim { display:inline-flex; align-items:center; gap:7px; color:var(--ghost); border:1px solid var(--ghostdim);
+    border-radius:999px; padding:3px 11px; font-weight:700; letter-spacing:.2em; }
+  .sim .dot { width:6px; height:6px; border-radius:50%; background:var(--ghost);
+    box-shadow:0 0 0 0 rgba(103,232,249,.55); animation:beat 2.4s ease-in-out infinite; }
+  @keyframes beat { 0%,100%{box-shadow:0 0 0 0 rgba(103,232,249,.5);} 50%{box-shadow:0 0 0 7px rgba(103,232,249,0);} }
+  h1 { font-family:system-ui,'Segoe UI',sans-serif; font-weight:800; letter-spacing:-1.5px; line-height:.98;
+    margin:14px 0 0; font-size:clamp(34px,7vw,64px); }
+  h1 .g { color:transparent; -webkit-text-stroke:1.4px var(--ghost); text-stroke:1.4px var(--ghost);
+    background:linear-gradient(180deg,rgba(103,232,249,.18),transparent); -webkit-background-clip:text; background-clip:text; }
+  h1 .amp { color:var(--mut2); font-weight:300; }
+  .dek { max-width:760px; color:var(--mut); font-size:14.5px; line-height:1.7; margin:16px 0 0; }
+  .dek b { color:#cdd6ee; } .dek .gh { color:var(--ghost2); } .dek .rl { color:var(--real2); }
+
+  /* ---------- stat strip ---------- */
+  .tiles { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin:26px 0 4px; }
+  @media(min-width:820px){ .tiles{ grid-template-columns:repeat(4,1fr); } }
+  .tile { border:1px solid var(--bd); background:var(--panel); border-radius:13px; padding:16px 16px 14px; }
+  .tile .big { font-family:system-ui,sans-serif; font-weight:800; font-size:30px; letter-spacing:-1px; line-height:1; }
+  .tile .big.gh { color:var(--ghost2); } .tile .big.rl { color:var(--real2); }
+  .tile .big.up { color:var(--up2); } .tile .big.dn { color:var(--dn2); }
+  .tile .lab { font-size:11.5px; color:var(--mut); margin-top:9px; line-height:1.45; }
+  .tile .lab b { color:#cdd6ee; }
+
+  /* ---------- section heads ---------- */
+  .shead { display:flex; align-items:baseline; gap:12px; margin:46px 0 6px; flex-wrap:wrap; }
+  .shead h2 { font-family:system-ui,sans-serif; font-weight:800; letter-spacing:-.4px; font-size:21px; margin:0; }
+  .shead .note { font-size:11.5px; color:var(--mut2); letter-spacing:.04em; }
+
+  /* ---------- bump chart ---------- */
+  .chartcard { border:1px solid var(--bd); background:var(--panel); border-radius:16px; padding:8px 6px 6px; margin-top:14px; overflow-x:auto; }
+  .legend { display:flex; flex-wrap:wrap; gap:16px; padding:12px 14px 4px; font-size:11.5px; color:var(--mut); }
+  .legend span { display:inline-flex; align-items:center; gap:7px; }
+  .legend i { width:18px; height:0; border-top:3px solid; border-radius:2px; }
+  svg.bump { width:100%; min-width:660px; height:auto; display:block; }
+  .bump .colh { font-family:system-ui,sans-serif; font-weight:800; font-size:13px; letter-spacing:.06em; }
+  .bump .colh.gh { fill:var(--ghost2); } .bump .colh.rh { fill:var(--real2); }
+  .bump .colsub { font-family:var(--mono); font-weight:400; font-size:10px; letter-spacing:.02em; fill:var(--mut2); }
+  .bump .axis { stroke:rgba(92,102,138,.3); stroke-width:1; }
+  .bump text.bl, .bump text.br { font-family:var(--mono); font-size:12px; fill:var(--mut); }
+  .bump text.gfeat, .bump text.rfeat { fill:var(--ink); font-weight:700; }
+  .bump .brk { fill:var(--mut2); font-size:11px; }
+  .bump .gfeat .brk { fill:var(--ghost); } .bump .rfeat .brk { fill:var(--real); }
+  .bump .dlt { font-size:10px; font-weight:700; }
+  .bump .dlt.up { fill:var(--up); } .bump .dlt.dn { fill:var(--dn); } .bump .dlt.fl { fill:var(--mut2); }
+
+  /* ---------- commentary ---------- */
+  .report { border:1px solid var(--bd); background:var(--panel); border-radius:16px; padding:8px 26px 26px; margin-top:14px; }
+  .report h2 { font-family:system-ui,sans-serif; font-weight:800; font-size:19px; letter-spacing:-.3px; margin:26px 0 4px; }
+  .report h3 { font-family:system-ui,sans-serif; font-weight:700; font-size:15px; color:var(--ghost2); margin:24px 0 6px; }
+  .report p { font-size:13.5px; line-height:1.78; color:#c4cde6; margin:0 0 6px; max-width:80ch; }
+  .report .lede { font-size:15px; line-height:1.8; color:var(--ink); border-left:3px solid var(--ghost);
+    padding-left:16px; margin:6px 0 8px; }
+  .report .name { color:#fff; font-weight:700; }
+  .report .team { color:var(--real2); }
+  .report .good { color:var(--up2); font-weight:700; }
+  .report .bad { color:var(--dn2); font-weight:700; }
+  .report .hot { color:var(--ghost2); font-weight:700; }
+
+  /* ---------- ghost table ---------- */
+  .tablecard { border:1px solid var(--bd); background:var(--panel); border-radius:16px; margin-top:14px; overflow:hidden; }
+  .tbl-scroll { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; min-width:720px; }
+  thead th { font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--mut2); text-align:left;
+    padding:14px 12px 11px; border-bottom:1px solid var(--bd); white-space:nowrap; }
+  thead th.num { text-align:right; }
+  .grow td { padding:11px 12px; border-bottom:1px solid rgba(56,68,102,.22); vertical-align:middle; }
+  .grow:last-child td { border-bottom:0; }
+  .grow.feat { background:linear-gradient(90deg,rgba(103,232,249,.06),transparent 70%); }
+  .rk { width:46px; } .rkn { font-family:system-ui,sans-serif; font-weight:800; font-size:18px; color:var(--mut); }
+  .grow.feat .rkn { color:var(--ghost2); }
+  .who { white-space:nowrap; }
+  .who .nm { display:block; font-weight:700; font-size:14px; color:var(--ink); }
+  .who .real { display:block; font-size:10.5px; color:var(--mut2); margin-top:2px; }
+  .v { font-weight:700; } .v.up { color:var(--up); } .v.dn { color:var(--dn); } .v.fl { color:var(--mut2); }
+  .hand { }
+  .chip { display:inline-flex; align-items:center; gap:5px; font-size:11px; color:var(--mut);
+    border:1px solid var(--bd); border-radius:6px; padding:3px 7px; margin:2px 4px 2px 0; white-space:nowrap; }
+  .chip .fl { font-size:13px; } .chip i { font-style:normal; color:var(--mut2); font-size:9px; }
+  .chip .gp { color:var(--ghost2); font-size:10px; } .chip .gp.z { color:var(--mut2); opacity:.6; }
+  td.num { text-align:right; font-size:14px; white-space:nowrap; }
+  td.gpts { color:var(--ghost2); } td.gcash { color:var(--mut); }
+  td.gtot { font-weight:800; color:var(--ink); font-size:15px; }
+  .mv { white-space:nowrap; }
+  .d { font-size:11px; font-weight:700; } .d.up { color:var(--up); } .d.dn { color:var(--dn); } .d.fl { color:var(--mut2); }
+
+  footer { margin-top:40px; border-top:1px solid var(--bd); padding-top:18px; font-size:11px; color:var(--mut2); line-height:1.7; }
+  footer b { color:var(--mut); }
+
+  @media (prefers-reduced-motion: reduce) { .sim .dot { animation:none; } }
+</style></head>
+<body><div class="wrap">
+
+  <header>
+    <div class="kick"><span class="sim"><span class="dot"></span>Counterfactual</span>
+      <span>0 trades simulated · 48 results · 24 managers</span></div>
+    <h1>The <span class="g">Ghost</span> Table</h1>
+    <div class="dek">The office sweepstakes as it would stand <b>if nobody had ever traded</b>. Same 48 matches,
+      same goals, same points — everyone simply keeps the <span class="gh">four teams and the bank they drafted</span>.
+      Set that ghost world beside <span class="rl">the real board</span> and you can read, in black and white, exactly
+      what 58 trades did to everyone's fortunes. As of <b>Thursday 25 June 2026</b>.</div>
+  </header>
+
+  <div class="tiles">
+    <div class="tile"><div class="big gh">Michael</div>
+      <div class="lab">would <b>lead</b> with nobody trading — in reality he's <b>21th</b></div></div>
+    <div class="tile"><div class="big rl">Paulius</div>
+      <div class="lab">the real leader — a ghost-table <b>13th</b> before he started dealing</div></div>
+    <div class="tile"><div class="big up">+12</div>
+      <div class="lab">managers <b>better off</b> for having traded</div></div>
+    <div class="tile"><div class="big dn">−12</div>
+      <div class="lab">managers <b>worse off</b> — trading is a two-way knife</div></div>
+  </div>
+
+  <div class="shead"><h2>The two worlds, side by side</h2>
+    <span class="note">left: rank if nobody traded · right: the real table · line colour = which way trading moved them</span></div>
+  <div class="chartcard">
+    <div class="legend">
+      <span><i style="border-color:var(--up)"></i>climbed by trading</span>
+      <span><i style="border-color:var(--dn)"></i>fell by trading</span>
+      <span><i style="border-color:var(--mut2)"></i>about level</span>
+      <span style="color:var(--mut2)">bold lines = the six names in the write-up</span>
+    </div>
+    <svg viewBox="0 0 820 740" class="bump" role="img"
+   aria-label="Bump chart linking each manager's no-trade rank to their real rank">
+  <defs><filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="2.4" result="b"/><feMerge>
+    <feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <text x="288" y="34" text-anchor="end" class="colh gh">GHOST TABLE<tspan class="colsub" x="288" dy="16">if nobody traded</tspan></text>
+  <text x="532" y="34" text-anchor="start" class="colh rh">AS IT STANDS<tspan class="colsub" x="532" dy="16">the real board</tspan></text>
+  <line x1="300" y1="58" x2="300" y2="718" class="axis"/>
+  <line x1="520" y1="58" x2="520" y2="718" class="axis"/>
+  <path d="M300,77.5 C410.0,77.5 410.0,617.5 520,617.5" fill="none" stroke="#fb7185" stroke-width="2.4" opacity="0.92" filter="url(#glow)"/><path d="M300,590.5 C410.0,590.5 410.0,698.5 520,698.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/><path d="M300,509.5 C410.0,509.5 410.0,158.5 520,158.5" fill="none" stroke="#34d399" stroke-width="1.2" opacity="0.34"/><path d="M300,401.5 C410.0,401.5 410.0,77.5 520,77.5" fill="none" stroke="#34d399" stroke-width="2.4" opacity="0.92" filter="url(#glow)"/><path d="M300,671.5 C410.0,671.5 410.0,374.5 520,374.5" fill="none" stroke="#34d399" stroke-width="1.2" opacity="0.34"/><path d="M300,482.5 C410.0,482.5 410.0,455.5 520,455.5" fill="none" stroke="#34d399" stroke-width="1.2" opacity="0.34"/><path d="M300,644.5 C410.0,644.5 410.0,212.5 520,212.5" fill="none" stroke="#34d399" stroke-width="2.4" opacity="0.92" filter="url(#glow)"/><path d="M300,158.5 C410.0,158.5 410.0,482.5 520,482.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/><path d="M300,239.5 C410.0,239.5 410.0,671.5 520,671.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/><path d="M300,212.5 C410.0,212.5 410.0,239.5 520,239.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/><path d="M300,131.5 C410.0,131.5 410.0,104.5 520,104.5" fill="none" stroke="#34d399" stroke-width="1.2" opacity="0.34"/><path d="M300,347.5 C410.0,347.5 410.0,563.5 520,563.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/><path d="M300,455.5 C410.0,455.5 410.0,428.5 520,428.5" fill="none" stroke="#34d399" stroke-width="1.2" opacity="0.34"/><path d="M300,563.5 C410.0,563.5 410.0,266.5 520,266.5" fill="none" stroke="#34d399" stroke-width="2.4" opacity="0.92" filter="url(#glow)"/><path d="M300,617.5 C410.0,617.5 410.0,401.5 520,401.5" fill="none" stroke="#34d399" stroke-width="1.2" opacity="0.34"/><path d="M300,374.5 C410.0,374.5 410.0,131.5 520,131.5" fill="none" stroke="#34d399" stroke-width="2.4" opacity="0.92" filter="url(#glow)"/><path d="M300,185.5 C410.0,185.5 410.0,590.5 520,590.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/><path d="M300,320.5 C410.0,320.5 410.0,509.5 520,509.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/><path d="M300,266.5 C410.0,266.5 410.0,320.5 520,320.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/><path d="M300,698.5 C410.0,698.5 410.0,347.5 520,347.5" fill="none" stroke="#34d399" stroke-width="2.4" opacity="0.92" filter="url(#glow)"/><path d="M300,293.5 C410.0,293.5 410.0,536.5 520,536.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/><path d="M300,428.5 C410.0,428.5 410.0,293.5 520,293.5" fill="none" stroke="#34d399" stroke-width="1.2" opacity="0.34"/><path d="M300,104.5 C410.0,104.5 410.0,185.5 520,185.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/><path d="M300,536.5 C410.0,536.5 410.0,644.5 520,644.5" fill="none" stroke="#fb7185" stroke-width="1.2" opacity="0.34"/>
+  <circle cx="300" cy="77.5" r="4.2" fill="#fb7185" opacity="0.92"/><circle cx="300" cy="590.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="300" cy="509.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="300" cy="401.5" r="4.2" fill="#34d399" opacity="0.92"/><circle cx="300" cy="671.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="300" cy="482.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="300" cy="644.5" r="4.2" fill="#34d399" opacity="0.92"/><circle cx="300" cy="158.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="300" cy="239.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="300" cy="212.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="300" cy="131.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="300" cy="347.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="300" cy="455.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="300" cy="563.5" r="4.2" fill="#34d399" opacity="0.92"/><circle cx="300" cy="617.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="300" cy="374.5" r="4.2" fill="#34d399" opacity="0.92"/><circle cx="300" cy="185.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="300" cy="320.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="300" cy="266.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="300" cy="698.5" r="4.2" fill="#34d399" opacity="0.92"/><circle cx="300" cy="293.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="300" cy="428.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="300" cy="104.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="300" cy="536.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="617.5" r="4.2" fill="#fb7185" opacity="0.92"/><circle cx="520" cy="698.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="158.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="520" cy="77.5" r="4.2" fill="#34d399" opacity="0.92"/><circle cx="520" cy="374.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="520" cy="455.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="520" cy="212.5" r="4.2" fill="#34d399" opacity="0.92"/><circle cx="520" cy="482.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="671.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="239.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="104.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="520" cy="563.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="428.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="520" cy="266.5" r="4.2" fill="#34d399" opacity="0.92"/><circle cx="520" cy="401.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="520" cy="131.5" r="4.2" fill="#34d399" opacity="0.92"/><circle cx="520" cy="590.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="509.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="320.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="347.5" r="4.2" fill="#34d399" opacity="0.92"/><circle cx="520" cy="536.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="293.5" r="2.6" fill="#34d399" opacity="0.34"/><circle cx="520" cy="185.5" r="2.6" fill="#fb7185" opacity="0.34"/><circle cx="520" cy="644.5" r="2.6" fill="#fb7185" opacity="0.34"/>
+  <text x="288" y="81.5" text-anchor="end" class="bl gfeat"><tspan class="brk">01</tspan>  Michael</text><text x="288" y="108.5" text-anchor="end" class="bl"><tspan class="brk">02</tspan>  Echo</text><text x="288" y="135.5" text-anchor="end" class="bl"><tspan class="brk">03</tspan>  Kerrill</text><text x="288" y="162.5" text-anchor="end" class="bl"><tspan class="brk">04</tspan>  Divisha</text><text x="288" y="189.5" text-anchor="end" class="bl"><tspan class="brk">05</tspan>  Elaine</text><text x="288" y="216.5" text-anchor="end" class="bl"><tspan class="brk">06</tspan>  Matt</text><text x="288" y="243.5" text-anchor="end" class="bl"><tspan class="brk">07</tspan>  Jing</text><text x="288" y="270.5" text-anchor="end" class="bl"><tspan class="brk">08</tspan>  CJ</text><text x="288" y="297.5" text-anchor="end" class="bl"><tspan class="brk">09</tspan>  AJ</text><text x="288" y="324.5" text-anchor="end" class="bl"><tspan class="brk">10</tspan>  Neil</text><text x="288" y="351.5" text-anchor="end" class="bl"><tspan class="brk">11</tspan>  Kwan</text><text x="288" y="378.5" text-anchor="end" class="bl gfeat"><tspan class="brk">12</tspan>  Haydee</text><text x="288" y="405.5" text-anchor="end" class="bl gfeat"><tspan class="brk">13</tspan>  Paulius</text><text x="288" y="432.5" text-anchor="end" class="bl"><tspan class="brk">14</tspan>  Tim</text><text x="288" y="459.5" text-anchor="end" class="bl"><tspan class="brk">15</tspan>  Rohit</text><text x="288" y="486.5" text-anchor="end" class="bl"><tspan class="brk">16</tspan>  Margot</text><text x="288" y="513.5" text-anchor="end" class="bl"><tspan class="brk">17</tspan>  Pak</text><text x="288" y="540.5" text-anchor="end" class="bl"><tspan class="brk">18</tspan>  Mike</text><text x="288" y="567.5" text-anchor="end" class="bl gfeat"><tspan class="brk">19</tspan>  Dea</text><text x="288" y="594.5" text-anchor="end" class="bl"><tspan class="brk">20</tspan>  Simon</text><text x="288" y="621.5" text-anchor="end" class="bl"><tspan class="brk">21</tspan>  Kelvin</text><text x="288" y="648.5" text-anchor="end" class="bl gfeat"><tspan class="brk">22</tspan>  Giannis</text><text x="288" y="675.5" text-anchor="end" class="bl"><tspan class="brk">23</tspan>  Josh</text><text x="288" y="702.5" text-anchor="end" class="bl gfeat"><tspan class="brk">24</tspan>  May</text>
+  <text x="532" y="81.5" text-anchor="start" class="br rfeat">Paulius  <tspan class="brk">01</tspan><tspan class="dlt up">  ▲12</tspan></text><text x="532" y="108.5" text-anchor="start" class="br">Kerrill  <tspan class="brk">02</tspan><tspan class="dlt up">  ▲1</tspan></text><text x="532" y="135.5" text-anchor="start" class="br rfeat">Haydee  <tspan class="brk">03</tspan><tspan class="dlt up">  ▲9</tspan></text><text x="532" y="162.5" text-anchor="start" class="br">Pak  <tspan class="brk">04</tspan><tspan class="dlt up">  ▲13</tspan></text><text x="532" y="189.5" text-anchor="start" class="br">Echo  <tspan class="brk">05</tspan><tspan class="dlt dn">  ▼3</tspan></text><text x="532" y="216.5" text-anchor="start" class="br rfeat">Giannis  <tspan class="brk">06</tspan><tspan class="dlt up">  ▲16</tspan></text><text x="532" y="243.5" text-anchor="start" class="br">Matt  <tspan class="brk">07</tspan><tspan class="dlt dn">  ▼1</tspan></text><text x="532" y="270.5" text-anchor="start" class="br rfeat">Dea  <tspan class="brk">08</tspan><tspan class="dlt up">  ▲11</tspan></text><text x="532" y="297.5" text-anchor="start" class="br">Tim  <tspan class="brk">09</tspan><tspan class="dlt up">  ▲5</tspan></text><text x="532" y="324.5" text-anchor="start" class="br">CJ  <tspan class="brk">10</tspan><tspan class="dlt dn">  ▼2</tspan></text><text x="532" y="351.5" text-anchor="start" class="br rfeat">May  <tspan class="brk">11</tspan><tspan class="dlt up">  ▲13</tspan></text><text x="532" y="378.5" text-anchor="start" class="br">Josh  <tspan class="brk">12</tspan><tspan class="dlt up">  ▲11</tspan></text><text x="532" y="405.5" text-anchor="start" class="br">Kelvin  <tspan class="brk">13</tspan><tspan class="dlt up">  ▲8</tspan></text><text x="532" y="432.5" text-anchor="start" class="br">Rohit  <tspan class="brk">14</tspan><tspan class="dlt up">  ▲1</tspan></text><text x="532" y="459.5" text-anchor="start" class="br">Margot  <tspan class="brk">15</tspan><tspan class="dlt up">  ▲1</tspan></text><text x="532" y="486.5" text-anchor="start" class="br">Divisha  <tspan class="brk">16</tspan><tspan class="dlt dn">  ▼12</tspan></text><text x="532" y="513.5" text-anchor="start" class="br">Neil  <tspan class="brk">17</tspan><tspan class="dlt dn">  ▼7</tspan></text><text x="532" y="540.5" text-anchor="start" class="br">AJ  <tspan class="brk">18</tspan><tspan class="dlt dn">  ▼9</tspan></text><text x="532" y="567.5" text-anchor="start" class="br">Kwan  <tspan class="brk">19</tspan><tspan class="dlt dn">  ▼8</tspan></text><text x="532" y="594.5" text-anchor="start" class="br">Elaine  <tspan class="brk">20</tspan><tspan class="dlt dn">  ▼15</tspan></text><text x="532" y="621.5" text-anchor="start" class="br rfeat">Michael  <tspan class="brk">21</tspan><tspan class="dlt dn">  ▼20</tspan></text><text x="532" y="648.5" text-anchor="start" class="br">Mike  <tspan class="brk">22</tspan><tspan class="dlt dn">  ▼4</tspan></text><text x="532" y="675.5" text-anchor="start" class="br">Jing  <tspan class="brk">23</tspan><tspan class="dlt dn">  ▼16</tspan></text><text x="532" y="702.5" text-anchor="start" class="br">Simon  <tspan class="brk">24</tspan><tspan class="dlt dn">  ▼4</tspan></text>
+</svg>
+  </div>
+
+  <div class="shead"><h2>What the trades actually did</h2>
+    <span class="note">the winners, the losers &amp; a few who never make the highlights</span></div>
+  
+  <section class="report">
+    <h2>📰 The world that never was · what trading actually did</h2>
+    <p class="lede">Strip every trade out of the ledger — hand everyone back their original four teams and their opening bank — and the league table you get is <b class="hot">almost unrecognisable</b>. The same matches, the same goals, the same points; only the <em>owners</em> change. And it turns out the owners are the whole game. In this ghost world a different manager lifts the trophy, the real-life runaway leader is becalmed in mid-table, and the player propping up the actual standings would have been comfortably mid-pack. Trading didn't just nudge this competition — it <b class="hot">authored</b> it.</p>
+
+    <h3>👻 The phantom champion · Michael</h3>
+    <p>Here is the headline the real table will never show you: in a no-trade universe <b class="name">Michael</b> is <b class="good">top of the pile</b> — 12 honest points on his original draft (<b class="team">Colombia</b> and <b class="team">Norway</b> both two-from-two for four apiece) and a tidy 3.68 bank for a leading <b class="good">15.68</b>. Then he started dealing. Cash bled out, points walked out of the door, and the would-be champion sits <b class="bad">21st</b> in reality on 6.85 — an <b class="bad">eight-and-a-half-point</b> self-inflicted wound and a twenty-place fall, the single biggest swing in the room. The cautionary tale of the whole report: he was already winning and traded it away.</p>
+
+    <h3>👑 The crown was built, not drawn · Paulius</h3>
+    <p>The flip side, and the rebuttal to anyone who thinks the leader just got lucky with the draw. Hand <b class="name">Paulius</b> only his original teams and he's a thoroughly ordinary <b>13th</b> on 10.92. Everything above that — the entire <b class="good">+12.47</b> that separates ghost-Paulius from real-Paulius, comfortably the biggest positive swing in the field — he <em>manufactured</em> at the table: buying back teams whose points were already in the bank, recycling cash into realised certainties. His lead isn't a gift of the draw. It's a body of work.</p>
+
+    <h3>🌟 Shoutout · May trades her way off the floor</h3>
+    <p>If you want a clinic in why this game rewards activity, look at <b class="name">May</b>. Her original hand was a trap — <b class="team">Mexico</b>, plus <b class="team">Turkey</b> (two games, no goals, eliminated), Senegal and Tunisia — worth just 4 points and a <b class="bad">dead-last 24th</b> in the ghost table, rock bottom of all twenty-four. In the real world she's climbed to <b class="good">11th</b> on 11.26: a thirteen-place rescue job and +4.10 of value conjured purely out of dealing. Nobody started in a worse spot; few have played their way out of it so well. Take a bow.</p>
+
+    <h3>🌟 Shoutout · Haydee reads the room</h3>
+    <p><b class="name">Haydee</b> is the quieter masterclass. A perfectly decent ghost hand (Netherlands &amp; Canada both flying, good for 8 points and 12th place) was never going to win her anything on its own. She's turned it into a genuine <b class="good">podium place — 3rd, on 14.60</b>, a nine-rung climb and +3.60 of added value, by trading from a position of strength rather than sitting on it. Where Michael cashed out a winning hand, Haydee compounded a good one. Same instrument, opposite result.</p>
+
+    <h3>🔎 Off the radar · Giannis & Dea</h3>
+    <p>Two names that never make the match reports, both quietly excellent in the market. <b class="name">Giannis</b> owns the single biggest <em>climb</em> in the whole field: a France-led hand that, with Austria, Senegal and Panama doing nothing around it, still left him a ghostly <b>22nd</b> — turned into a real-world <b class="good">6th</b>, up sixteen places and +4.30, the best pure trade-up of anyone. And spare a thought for <b class="name">Dea</b>, up from a phantom 19th to a real <b>8th</b> (+11 places) — an Argentina-and-Croatia hand that looked ordinary on paper, worked hard into a top-third finish. Neither gets the airtime; both have outdealt most of the table.</p>
+
+    <h3>📉 The other side of the ledger</h3>
+    <p>For balance: trading is a knife that cuts both ways. Besides Michael, <b class="name">Jing</b> (a ghost 7th, now 23rd, −5.57) and <b class="name">Elaine</b> (5th → 20th, −4.30) both surrendered strong opening hands at the table, while <b class="name">Simon</b>'s KingKiller crusade turned a respectable ghost 20th into <b class="bad">dead last</b> for real. The verdict of the counterfactual is blunt and even-handed: <b class="hot">12 managers are better off for having traded, 12 are worse off.</b> The draw deals you a hand. What you do with it is the entire contest — and these tables are the receipts.</p>
+  </section>
+
+
+  <div class="shead"><h2>The full ghost standings</h2>
+    <span class="note">ranked as the table would be with zero trades · each row shows its real-world counterpart</span></div>
+  <div class="tablecard"><div class="tbl-scroll">
+    <table>
+      <thead><tr>
+        <th>#</th><th>Manager</th><th>Drafted hand (ghost points)</th>
+        <th class="num">Pts</th><th class="num">Cash</th><th class="num">Total</th><th>vs. reality</th>
+      </tr></thead>
+      <tbody>
+      <tr class="grow feat">
+      <td class="rk"><span class="rkn">01</span></td>
+      <td class="who"><span class="nm">Michael</span>
+          <span class="real">real&nbsp;#21 · 6.85 <span class="v dn">-8.83</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇨🇴</span>Colombia<b class="gp">+4</b></span><span class="chip"><span class="fl">🇳🇴</span>Norway<b class="gp">+4</b></span><span class="chip"><span class="fl">🇵🇾</span>Paraguay<b class="gp">+2</b></span><span class="chip"><span class="fl">🇨🇻</span>Cape Verde<b class="gp">+2</b></span></td>
+      <td class="num gpts">12</td>
+      <td class="num gcash">3.68</td>
+      <td class="num gtot">15.68</td>
+      <td class="mv"><span class="d dn">▼ 20 places worse off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">02</span></td>
+      <td class="who"><span class="nm">Echo</span>
+          <span class="real">real&nbsp;#05 · 13.18 <span class="v dn">-0.95</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇲🇽</span>Mexico<b class="gp">+4</b></span><span class="chip"><span class="fl">🇺🇸</span>USA<b class="gp">+4</b></span><span class="chip"><span class="fl">🇩🇿</span>Algeria<b class="gp">+2</b></span><span class="chip"><span class="fl">🇨🇩</span>DR Congo<b class="gp">+1</b></span></td>
+      <td class="num gpts">11</td>
+      <td class="num gcash">3.13</td>
+      <td class="num gtot">14.13</td>
+      <td class="mv"><span class="d dn">▼ 3 places worse off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">03</span></td>
+      <td class="who"><span class="nm">Kerrill</span>
+          <span class="real">real&nbsp;#02 · 16.36 <span class="v up">+2.30</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇨🇴</span>Colombia<b class="gp">+4</b></span><span class="chip"><span class="fl">🇺🇾</span>Uruguay<b class="gp">+2</b></span><span class="chip"><span class="fl">🇸🇪</span>Sweden<b class="gp">+2</b></span><span class="chip"><span class="fl">🇨🇼</span>Curaçao<b class="gp">+1</b></span></td>
+      <td class="num gpts">9</td>
+      <td class="num gcash">5.06</td>
+      <td class="num gtot">14.06</td>
+      <td class="mv"><span class="d up">▲ 1 place better off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">04</span></td>
+      <td class="who"><span class="nm">Divisha</span>
+          <span class="real">real&nbsp;#16 · 10.21 <span class="v dn">-3.22</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇪🇸</span>Spain<b class="gp">+3</b></span><span class="chip"><span class="fl">🇺🇸</span>USA<b class="gp">+4</b></span><span class="chip"><span class="fl">🇬🇭</span>Ghana<b class="gp">+3</b></span><span class="chip"><span class="fl">🇨🇻</span>Cape Verde<b class="gp">+2</b></span></td>
+      <td class="num gpts">12</td>
+      <td class="num gcash">1.43</td>
+      <td class="num gtot">13.43</td>
+      <td class="mv"><span class="d dn">▼ 12 places worse off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">05</span></td>
+      <td class="who"><span class="nm">Elaine</span>
+          <span class="real">real&nbsp;#20 · 8.69 <span class="v dn">-4.30</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇫🇷</span>France<b class="gp">+4</b></span><span class="chip"><span class="fl">🇯🇵</span>Japan<b class="gp">+3</b></span><span class="chip"><span class="fl">🇰🇷</span>South Korea<b class="gp">+2</b></span><span class="chip"><span class="fl">🇶🇦</span>Qatar<b class="gp">+1</b></span></td>
+      <td class="num gpts">10</td>
+      <td class="num gcash">2.99</td>
+      <td class="num gtot">12.99</td>
+      <td class="mv"><span class="d dn">▼ 15 places worse off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">06</span></td>
+      <td class="who"><span class="nm">Matt</span>
+          <span class="real">real&nbsp;#07 · 12.52 <span class="v fl">0.00</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇩🇪</span>Germany<b class="gp">+4</b></span><span class="chip"><span class="fl">🇯🇵</span>Japan<b class="gp">+3</b></span><span class="chip"><span class="fl">🇿🇦</span>South Africa<b class="gp">+1</b></span><span class="chip"><span class="fl">🇳🇿</span>New Zealand<b class="gp">+1</b></span></td>
+      <td class="num gpts">9</td>
+      <td class="num gcash">3.52</td>
+      <td class="num gtot">12.52</td>
+      <td class="mv"><span class="d dn">▼ 1 place worse off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">07</span></td>
+      <td class="who"><span class="nm">Jing</span>
+          <span class="real">real&nbsp;#23 · 6.28 <span class="v dn">-5.57</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇨🇭</span>Switzerland<b class="gp">+3</b></span><span class="chip"><span class="fl">🇨🇮</span>Ivory Coast<b class="gp">+2</b></span><span class="chip"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>Scotland<b class="gp">+2</b></span><span class="chip"><span class="fl">🇸🇦</span>Saudi Arabia<b class="gp">+1</b></span></td>
+      <td class="num gpts">8</td>
+      <td class="num gcash">3.85</td>
+      <td class="num gtot">11.85</td>
+      <td class="mv"><span class="d dn">▼ 16 places worse off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">08</span></td>
+      <td class="who"><span class="nm">CJ</span>
+          <span class="real">real&nbsp;#10 · 11.60 <span class="v fl">0.00</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇧🇷</span>Brazil<b class="gp">+3</b></span><span class="chip"><span class="fl">🇦🇹</span>Austria<b class="gp">+2</b></span><span class="chip"><span class="fl">🇬🇭</span>Ghana<b class="gp">+3</b></span><span class="chip"><span class="fl">🇳🇿</span>New Zealand<b class="gp">+1</b></span></td>
+      <td class="num gpts">9</td>
+      <td class="num gcash">2.60</td>
+      <td class="num gtot">11.60</td>
+      <td class="mv"><span class="d dn">▼ 2 places worse off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">09</span></td>
+      <td class="who"><span class="nm">AJ</span>
+          <span class="real">real&nbsp;#18 · 9.47 <span class="v dn">-1.99</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>England<b class="gp">+3</b></span><span class="chip"><span class="fl">🇪🇬</span>Egypt<b class="gp">+3</b></span><span class="chip"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>Scotland<b class="gp">+2</b></span><span class="chip"><span class="fl">🇨🇩</span>DR Congo<b class="gp">+1</b></span></td>
+      <td class="num gpts">9</td>
+      <td class="num gcash">2.46</td>
+      <td class="num gtot">11.46</td>
+      <td class="mv"><span class="d dn">▼ 9 places worse off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">10</span></td>
+      <td class="who"><span class="nm">Neil</span>
+          <span class="real">real&nbsp;#17 · 9.76 <span class="v dn">-1.50</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>England<b class="gp">+3</b></span><span class="chip"><span class="fl">🇨🇦</span>Canada<b class="gp">+3</b></span><span class="chip"><span class="fl">🇦🇺</span>Australia<b class="gp">+2</b></span><span class="chip"><span class="fl">🇮🇶</span>Iraq<b class="gp z">0</b></span></td>
+      <td class="num gpts">8</td>
+      <td class="num gcash">3.26</td>
+      <td class="num gtot">11.26</td>
+      <td class="mv"><span class="d dn">▼ 7 places worse off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">11</span></td>
+      <td class="who"><span class="nm">Kwan</span>
+          <span class="real">real&nbsp;#19 · 9.10 <span class="v dn">-1.95</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇵🇹</span>Portugal<b class="gp">+3</b></span><span class="chip"><span class="fl">🇪🇬</span>Egypt<b class="gp">+3</b></span><span class="chip"><span class="fl">🇧🇦</span>Bosnia &amp; H.<b class="gp">+1</b></span><span class="chip"><span class="fl">🇭🇹</span>Haiti<b class="gp z">0</b></span></td>
+      <td class="num gpts">7</td>
+      <td class="num gcash">4.05</td>
+      <td class="num gtot">11.05</td>
+      <td class="mv"><span class="d dn">▼ 8 places worse off trading</span></td>
+    </tr>
+<tr class="grow feat">
+      <td class="rk"><span class="rkn">12</span></td>
+      <td class="who"><span class="nm">Haydee</span>
+          <span class="real">real&nbsp;#03 · 14.60 <span class="v up">+3.60</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇳🇱</span>Netherlands<b class="gp">+3</b></span><span class="chip"><span class="fl">🇨🇦</span>Canada<b class="gp">+3</b></span><span class="chip"><span class="fl">🇨🇿</span>Czechia<b class="gp">+1</b></span><span class="chip"><span class="fl">🇸🇦</span>Saudi Arabia<b class="gp">+1</b></span></td>
+      <td class="num gpts">8</td>
+      <td class="num gcash">3.00</td>
+      <td class="num gtot">11.00</td>
+      <td class="mv"><span class="d up">▲ 9 places better off trading</span></td>
+    </tr>
+<tr class="grow feat">
+      <td class="rk"><span class="rkn">13</span></td>
+      <td class="who"><span class="nm">Paulius</span>
+          <span class="real">real&nbsp;#01 · 23.39 <span class="v up">+12.47</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇵🇹</span>Portugal<b class="gp">+3</b></span><span class="chip"><span class="fl">🇲🇦</span>Morocco<b class="gp">+3</b></span><span class="chip"><span class="fl">🇵🇾</span>Paraguay<b class="gp">+2</b></span><span class="chip"><span class="fl">🇯🇴</span>Jordan<b class="gp z">0</b></span></td>
+      <td class="num gpts">8</td>
+      <td class="num gcash">2.92</td>
+      <td class="num gtot">10.92</td>
+      <td class="mv"><span class="d up">▲ 12 places better off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">14</span></td>
+      <td class="who"><span class="nm">Tim</span>
+          <span class="real">real&nbsp;#09 · 11.85 <span class="v up">+1.10</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇦🇷</span>Argentina<b class="gp">+4</b></span><span class="chip"><span class="fl">🇲🇦</span>Morocco<b class="gp">+3</b></span><span class="chip"><span class="fl">🇧🇦</span>Bosnia &amp; H.<b class="gp">+1</b></span><span class="chip"><span class="fl">🇯🇴</span>Jordan<b class="gp z">0</b></span></td>
+      <td class="num gpts">8</td>
+      <td class="num gcash">2.75</td>
+      <td class="num gtot">10.75</td>
+      <td class="mv"><span class="d up">▲ 5 places better off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">15</span></td>
+      <td class="who"><span class="nm">Rohit</span>
+          <span class="real">real&nbsp;#14 · 10.78 <span class="v up">+0.35</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇩🇪</span>Germany<b class="gp">+4</b></span><span class="chip"><span class="fl">🇨🇮</span>Ivory Coast<b class="gp">+2</b></span><span class="chip"><span class="fl">🇸🇪</span>Sweden<b class="gp">+2</b></span><span class="chip"><span class="fl">🇹🇳</span>Tunisia<b class="gp z">0</b></span></td>
+      <td class="num gpts">8</td>
+      <td class="num gcash">2.43</td>
+      <td class="num gtot">10.43</td>
+      <td class="mv"><span class="d up">▲ 1 place better off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">16</span></td>
+      <td class="who"><span class="nm">Margot</span>
+          <span class="real">real&nbsp;#15 · 10.25 <span class="v fl">0.00</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇧🇪</span>Belgium<b class="gp">+2</b></span><span class="chip"><span class="fl">🇪🇨</span>Ecuador<b class="gp">+1</b></span><span class="chip"><span class="fl">🇦🇺</span>Australia<b class="gp">+2</b></span><span class="chip"><span class="fl">🇨🇼</span>Curaçao<b class="gp">+1</b></span></td>
+      <td class="num gpts">6</td>
+      <td class="num gcash">4.25</td>
+      <td class="num gtot">10.25</td>
+      <td class="mv"><span class="d up">▲ 1 place better off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">17</span></td>
+      <td class="who"><span class="nm">Pak</span>
+          <span class="real">real&nbsp;#04 · 13.69 <span class="v up">+3.50</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇧🇪</span>Belgium<b class="gp">+2</b></span><span class="chip"><span class="fl">🇳🇴</span>Norway<b class="gp">+4</b></span><span class="chip"><span class="fl">🇩🇿</span>Algeria<b class="gp">+2</b></span><span class="chip"><span class="fl">🇺🇿</span>Uzbekistan<b class="gp z">0</b></span></td>
+      <td class="num gpts">8</td>
+      <td class="num gcash">2.19</td>
+      <td class="num gtot">10.19</td>
+      <td class="mv"><span class="d up">▲ 13 places better off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">18</span></td>
+      <td class="who"><span class="nm">Mike</span>
+          <span class="real">real&nbsp;#22 · 6.78 <span class="v dn">-3.41</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇳🇱</span>Netherlands<b class="gp">+3</b></span><span class="chip"><span class="fl">🇹🇷</span>Turkey<b class="gp z">0</b></span><span class="chip"><span class="fl">🇿🇦</span>South Africa<b class="gp">+1</b></span><span class="chip"><span class="fl">🇮🇶</span>Iraq<b class="gp z">0</b></span></td>
+      <td class="num gpts">4</td>
+      <td class="num gcash">6.19</td>
+      <td class="num gtot">10.19</td>
+      <td class="mv"><span class="d dn">▼ 4 places worse off trading</span></td>
+    </tr>
+<tr class="grow feat">
+      <td class="rk"><span class="rkn">19</span></td>
+      <td class="who"><span class="nm">Dea</span>
+          <span class="real">real&nbsp;#08 · 11.93 <span class="v up">+2.10</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇦🇷</span>Argentina<b class="gp">+4</b></span><span class="chip"><span class="fl">🇭🇷</span>Croatia<b class="gp">+2</b></span><span class="chip"><span class="fl">🇨🇿</span>Czechia<b class="gp">+1</b></span><span class="chip"><span class="fl">🇭🇹</span>Haiti<b class="gp z">0</b></span></td>
+      <td class="num gpts">7</td>
+      <td class="num gcash">2.83</td>
+      <td class="num gtot">9.83</td>
+      <td class="mv"><span class="d up">▲ 11 places better off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">20</span></td>
+      <td class="who"><span class="nm">Simon</span>
+          <span class="real">real&nbsp;#24 · 2.30 <span class="v dn">-7.03</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇨🇭</span>Switzerland<b class="gp">+3</b></span><span class="chip"><span class="fl">🇺🇾</span>Uruguay<b class="gp">+2</b></span><span class="chip"><span class="fl">🇰🇷</span>South Korea<b class="gp">+2</b></span><span class="chip"><span class="fl">🇵🇦</span>Panama<b class="gp z">0</b></span></td>
+      <td class="num gpts">7</td>
+      <td class="num gcash">2.33</td>
+      <td class="num gtot">9.33</td>
+      <td class="mv"><span class="d dn">▼ 4 places worse off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">21</span></td>
+      <td class="who"><span class="nm">Kelvin</span>
+          <span class="real">real&nbsp;#13 · 10.91 <span class="v up">+1.95</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇧🇷</span>Brazil<b class="gp">+3</b></span><span class="chip"><span class="fl">🇪🇨</span>Ecuador<b class="gp">+1</b></span><span class="chip"><span class="fl">🇮🇷</span>Iran<b class="gp">+2</b></span><span class="chip"><span class="fl">🇶🇦</span>Qatar<b class="gp">+1</b></span></td>
+      <td class="num gpts">7</td>
+      <td class="num gcash">1.96</td>
+      <td class="num gtot">8.96</td>
+      <td class="mv"><span class="d up">▲ 8 places better off trading</span></td>
+    </tr>
+<tr class="grow feat">
+      <td class="rk"><span class="rkn">22</span></td>
+      <td class="who"><span class="nm">Giannis</span>
+          <span class="real">real&nbsp;#06 · 12.74 <span class="v up">+4.30</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇫🇷</span>France<b class="gp">+4</b></span><span class="chip"><span class="fl">🇦🇹</span>Austria<b class="gp">+2</b></span><span class="chip"><span class="fl">🇸🇳</span>Senegal<b class="gp z">0</b></span><span class="chip"><span class="fl">🇵🇦</span>Panama<b class="gp z">0</b></span></td>
+      <td class="num gpts">6</td>
+      <td class="num gcash">2.44</td>
+      <td class="num gtot">8.44</td>
+      <td class="mv"><span class="d up">▲ 16 places better off trading</span></td>
+    </tr>
+<tr class="grow">
+      <td class="rk"><span class="rkn">23</span></td>
+      <td class="who"><span class="nm">Josh</span>
+          <span class="real">real&nbsp;#12 · 10.98 <span class="v up">+2.98</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇪🇸</span>Spain<b class="gp">+3</b></span><span class="chip"><span class="fl">🇭🇷</span>Croatia<b class="gp">+2</b></span><span class="chip"><span class="fl">🇮🇷</span>Iran<b class="gp">+2</b></span><span class="chip"><span class="fl">🇺🇿</span>Uzbekistan<b class="gp z">0</b></span></td>
+      <td class="num gpts">7</td>
+      <td class="num gcash">1.00</td>
+      <td class="num gtot">8.00</td>
+      <td class="mv"><span class="d up">▲ 11 places better off trading</span></td>
+    </tr>
+<tr class="grow feat">
+      <td class="rk"><span class="rkn">24</span></td>
+      <td class="who"><span class="nm">May</span>
+          <span class="real">real&nbsp;#11 · 11.26 <span class="v up">+4.10</span></span></td>
+      <td class="hand"><span class="chip"><span class="fl">🇲🇽</span>Mexico<b class="gp">+4</b></span><span class="chip"><span class="fl">🇹🇷</span>Turkey<b class="gp z">0</b></span><span class="chip"><span class="fl">🇸🇳</span>Senegal<b class="gp z">0</b></span><span class="chip"><span class="fl">🇹🇳</span>Tunisia<b class="gp z">0</b></span></td>
+      <td class="num gpts">4</td>
+      <td class="num gcash">3.16</td>
+      <td class="num gtot">7.16</td>
+      <td class="mv"><span class="d up">▲ 13 places better off trading</span></td>
+    </tr>
+      </tbody>
+    </table>
+  </div></div>
+
+  <footer>
+    Generated by <b>_ghost_report.py</b> from <b>trades.txt</b>. The <b>ghost table</b> is a counterfactual: every manager
+    keeps their original locked-draft hand and opening bank, so each match result is credited to the team's <b>original</b>
+    owner and total = original cash + points on originally-drafted teams. The real-world figures mirror the live report's
+    attribution (points bank to whoever holds a team when its result is recorded). Scoring Win 2 · Draw 1 · Loss 0.
+    Commentary is hand-written and does not auto-update. Flag emoji may render as country codes on Windows/Chromium — not a bug.
+  </footer>
+
+</div></body></html>
