@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>World Cup 2026 — The King is Dead, Long Live the King</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>World Cup 2026 — The King is Dead · The Graveyard</title>
 <style>
   :root { --bg:#020617; --card:rgba(15,23,42,.6); --bd:rgba(51,65,85,.5); --em:#34d399; --emd:#6ee7b7; --am:#fbbf24; --amd:#fcd34d; --tx:#f1f5f9; --mut:#94a3b8; --mut2:#64748b; --rose:#fb7185; }
   * { box-sizing:border-box; }
@@ -35,17 +35,6 @@
   .epi .att { display:block; font-style:normal; font-size:11px; color:var(--mut2); margin-top:6px; letter-spacing:.04em; }
   .bullets { margin:4px 0 10px; padding-left:18px; }
   .bullets li { font-size:13.5px; line-height:1.7; color:#cbd5e1; margin-bottom:7px; }
-  /* title-race bars */
-  .prow { display:grid; grid-template-columns:84px 1fr; gap:8px 10px; align-items:center; margin-bottom:7px; }
-  .prow .pn { font-weight:bold; color:#fff; font-size:13px; text-align:right; }
-  .prow .ptrack { background:rgba(2,6,23,.6); border:1px solid var(--bd); border-radius:6px; height:24px; position:relative; overflow:hidden; }
-  .prow .pbar { height:100%; border-radius:5px 0 0 5px; display:flex; align-items:center; justify-content:flex-end; padding-right:7px; min-width:34px; transition:width .9s cubic-bezier(.2,.7,.2,1); }
-  .pbar.b-hi { background:linear-gradient(90deg,rgba(52,211,153,.35),var(--em)); }
-  .pbar.b-mid { background:linear-gradient(90deg,rgba(251,191,36,.3),var(--am)); }
-  .pbar.b-lo { background:linear-gradient(90deg,rgba(148,163,184,.2),var(--mut)); }
-  .pbar .pv { font-size:12px; font-weight:bold; color:#04110b; }
-  .pbar.b-lo .pv { color:#0a0f1c; }
-  .prow .pteams { grid-column:2; font-size:10.5px; color:var(--mut); margin:-3px 0 2px; }
   /* bracket */
   .bracket-scroll { overflow-x:auto; padding:6px 2px 14px; -webkit-overflow-scrolling:touch; }
   .bracket { display:flex; gap:26px; min-width:1080px; align-items:stretch; }
@@ -57,7 +46,6 @@
   .bmno { font-size:8.5px; color:var(--mut2); letter-spacing:.06em; }
   .bsc { font-size:9px; font-weight:bold; color:#cbd5e1; background:rgba(15,23,42,.8); border-radius:4px; padding:1px 5px; }
   .bsc.tbd { color:var(--mut2); background:transparent; }
-  .bsc.proj { color:var(--amd); background:rgba(251,191,36,.12); }
   .bteam { display:flex; align-items:center; gap:5px; padding:3px 4px; border-radius:5px; font-size:11.5px; }
   .bteam .bfl { font-size:13px; }
   .bteam .bn { font-weight:bold; color:#e2e8f0; white-space:nowrap; }
@@ -70,11 +58,13 @@
   .champ { margin-top:14px; text-align:center; font-size:11px; color:var(--amd); line-height:1.5; }
   .champ span { display:block; color:var(--mut); font-size:10px; }
   /* interview */
-  .report.interview .qa { margin:0 0 14px; }
-  .report.interview .q { color:var(--amd); font-weight:bold; font-size:13px; margin:0 0 4px; }
-  .report.interview .q::before { content:"REPORTER  "; color:var(--mut2); font-size:10px; letter-spacing:.1em; }
-  .report.interview .a { color:#cbd5e1; font-size:13.5px; line-height:1.78; margin:0; padding-left:14px; border-left:2px solid rgba(52,211,153,.3); }
-  .report.interview .a::before { content:"PAULIUS  "; display:block; color:var(--em); font-size:10px; letter-spacing:.1em; font-weight:bold; margin-bottom:2px; }
+  .miniint { border:1px solid rgba(52,211,153,.28); background:rgba(2,6,23,.4); border-radius:10px; padding:14px 16px; margin:14px 0 2px; }
+  .miniint .mihead { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--amd); margin-bottom:11px; }
+  .miniint .qa { margin-bottom:12px; } .miniint .qa:last-child { margin-bottom:0; }
+  .miniint .q { color:var(--amd); font-weight:bold; font-size:13px; margin:0 0 4px; }
+  .miniint .q::before { content:"REPORTER  "; color:var(--mut2); font-size:10px; letter-spacing:.1em; }
+  .miniint .a { color:#cbd5e1; font-size:13.5px; line-height:1.78; margin:0; padding-left:14px; border-left:2px solid rgba(52,211,153,.3); }
+  .miniint .a::before { content: attr(data-speaker); display:block; color:var(--em); font-size:10px; letter-spacing:.1em; font-weight:bold; margin-bottom:2px; }
   /* standings */
   .grid { display:grid; grid-template-columns:1fr; gap:14px; margin-bottom:30px; }
   @media(min-width:640px){ .grid{ grid-template-columns:repeat(2,1fr); } }
@@ -86,12 +76,14 @@
   .card.leader .ptot b { font-size:23px; color:#fecdd3; }
   .card.r2 { border-color:rgba(251,191,36,.5); background:linear-gradient(160deg,rgba(251,191,36,.08),var(--card) 60%); }
   .card.r3 { border-color:rgba(203,213,225,.4); }
+  .card.out { opacity:.72; }
   .chead { display:flex; align-items:center; justify-content:space-between; gap:8px; border-bottom:1px solid var(--bd); padding-bottom:8px; margin-bottom:8px; }
   .pname { color:var(--em); font-weight:bold; font-size:14px; }
   .ptot { text-align:right; } .ptot .tlabel { display:block; font-size:9px; color:var(--mut2); } .ptot b { color:var(--emd); font-size:18px; }
-  .oddline { display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:11px; }
-  .oddline .oddlab { color:var(--mut2); text-transform:uppercase; letter-spacing:.08em; }
-  .oddline b { font-size:14px; } .oddline b.odhi { color:var(--emd); } .oddline b.odmid { color:var(--amd); } .oddline b.odlo { color:var(--mut); }
+  .statusline { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .statuspill { font-size:9.5px; font-weight:bold; letter-spacing:.04em; padding:3px 8px; border-radius:10px; white-space:nowrap; }
+  .statuspill.alive { background:rgba(52,211,153,.14); color:var(--emd); border:1px solid rgba(52,211,153,.3); }
+  .statuspill.dead { background:rgba(251,113,133,.14); color:var(--rose); border:1px solid rgba(251,113,133,.35); }
   .livetag { margin-left:auto; font-size:9px; padding:2px 7px; border-radius:10px; background:rgba(52,211,153,.14); color:var(--emd); border:1px solid rgba(52,211,153,.3); }
   .livetag.out { background:rgba(251,113,133,.12); color:var(--rose); border-color:rgba(251,113,133,.3); }
   .chips { display:flex; flex-direction:column; gap:5px; }
@@ -120,20 +112,37 @@
   .meta { display:flex; align-items:center; gap:8px; } .meta .win { color:var(--emd); font-weight:bold; } .meta .draw { color:var(--amd); font-weight:bold; }
   .meta .rnd { font-size:10px; color:var(--mut2); text-transform:uppercase; letter-spacing:.06em; }
   .meta .rnd.ko { color:var(--amd); background:rgba(251,191,36,.12); border-radius:4px; padding:1px 6px; }
-  /* michael mini-interview */
-  .miniint { border:1px solid rgba(52,211,153,.28); background:rgba(2,6,23,.4); border-radius:10px; padding:14px 16px; margin:14px 0 2px; }
-  .miniint .mihead { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--amd); margin-bottom:11px; }
-  .miniint .qa { margin-bottom:12px; } .miniint .qa:last-child { margin-bottom:0; }
-  .miniint .q { color:var(--amd); font-weight:bold; font-size:13px; margin:0 0 4px; }
-  .miniint .q::before { content:"REPORTER  "; color:var(--mut2); font-size:10px; letter-spacing:.1em; }
-  .miniint .a { color:#cbd5e1; font-size:13.5px; line-height:1.78; margin:0; padding-left:14px; border-left:2px solid rgba(52,211,153,.3); }
-  .miniint .a::before { content:"MICHAEL  "; display:block; color:var(--em); font-size:10px; letter-spacing:.1em; font-weight:bold; margin-bottom:2px; }
   /* office slack aside */
   .slackmsg { display:flex; gap:11px; align-items:flex-start; background:rgba(15,23,42,.6); border:1px solid var(--bd); border-radius:10px; padding:11px 13px; margin:10px 0 4px; max-width:540px; }
   .slackmsg .av { width:34px; height:34px; border-radius:7px; background:linear-gradient(135deg,#7c3aed,#db2777); display:flex; align-items:center; justify-content:center; font-weight:bold; color:#fff; font-size:13px; flex-shrink:0; }
   .slackmsg .body { font-size:13px; line-height:1.4; }
   .slackmsg .who { font-weight:bold; color:#e2e8f0; } .slackmsg .ts { color:var(--mut2); font-size:10px; margin-left:7px; }
   .slackmsg .txt { color:#cbd5e1; margin-top:3px; font-size:13.5px; }
+  /* ---- THE GRAVEYARD ---- */
+  .graveyard-section { position:relative; background:radial-gradient(ellipse at 20% 0%,rgba(148,163,184,.08),transparent 60%),radial-gradient(ellipse at 85% 100%,rgba(52,211,153,.05),transparent 55%),var(--card); }
+  .gravecontrols { display:flex; align-items:center; gap:14px; margin:10px 0 16px; }
+  .gcount { font-size:11px; color:var(--mut2); letter-spacing:.06em; text-transform:uppercase; }
+  .digall { font-family:inherit; font-size:11px; letter-spacing:.04em; font-weight:bold; color:#04110b; background:linear-gradient(90deg,var(--em),var(--emd)); border:none; border-radius:8px; padding:8px 14px; cursor:pointer; }
+  .digall:hover { filter:brightness(1.08); }
+  .digall:focus-visible, .grave:focus-visible { outline:2px solid var(--em); outline-offset:2px; }
+  .graveyard-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  @media(min-width:640px){ .graveyard-grid{ grid-template-columns:repeat(3,1fr); } }
+  @media(min-width:980px){ .graveyard-grid{ grid-template-columns:repeat(4,1fr); } }
+  .grave { position:relative; font-family:inherit; text-align:left; cursor:pointer; padding:0; border:none; background:none; color:inherit; min-height:280px; }
+  .grave-face, .grave-back { position:absolute; inset:0; border:1px solid rgba(148,163,184,.35); background:linear-gradient(160deg,#1e293b,#0f172a 65%); display:flex; flex-direction:column; gap:6px; transition:opacity .35s ease, transform .35s ease; overflow:hidden; }
+  .grave-face { border-radius:50% 50% 6px 6px / 62% 62% 6px 6px; padding:16px 12px; align-items:center; justify-content:center; text-align:center; }
+  .grave-face .cross { font-size:22px; color:var(--mut); opacity:.8; }
+  .grave-face .qmark { font-size:26px; font-weight:bold; color:#e2e8f0; }
+  .grave-face .hint { font-size:9px; color:var(--mut2); text-transform:uppercase; letter-spacing:.1em; }
+  .grave-back { border-radius:14px; padding:16px 14px; align-items:flex-start; justify-content:flex-start; text-align:left; opacity:0; transform:translateY(6px); pointer-events:none; background:linear-gradient(160deg,rgba(30,41,59,.97),rgba(2,6,23,.98) 70%); border-color:rgba(251,113,133,.35); }
+  .grave.open .grave-face { opacity:0; transform:translateY(-6px); pointer-events:none; }
+  .grave.open .grave-back { opacity:1; transform:none; pointer-events:auto; }
+  .grave-back .rip { font-size:9px; letter-spacing:.2em; color:var(--mut2); text-transform:uppercase; }
+  .grave-back .gname { font-size:15px; font-weight:bold; color:#fecdd3; }
+  .grave-back .gtotal { font-size:11px; color:var(--amd); }
+  .grave-back .gcause { font-size:10.5px; color:#cbd5e1; line-height:1.48; margin-top:2px; }
+  .grave-back .gepitaph { font-size:10px; color:var(--mut); line-height:1.55; font-style:italic; margin-top:4px; }
+  .grave:hover .grave-face { filter:brightness(1.15); }
   footer { margin-top:30px; border-top:1px solid var(--bd); padding-top:18px; font-size:11px; color:var(--mut2); line-height:1.6; }
 </style>
 
@@ -152,126 +161,174 @@
   <header class="hero">
     <div class="kicker">⚽ World Cup 2026 · Office Sweepstakes · Special Edition</div>
     <div class="crowns">♚&nbsp;&nbsp;♔</div>
-    <h1 class="title">The King is dead,<br><span class="live">long live the King!</span></h1>
-    <div class="sub">As of <b>Tuesday 30 June 2026</b> — replayed from <b>trades.txt</b> (58 trades, 76 results). The group stage is over; the knockouts have begun. <b>Paulius</b> still tops the table on <b>23.39</b> — but holds a hand of corpses, and the model makes him a <b>8.5%</b> outsider. <b>Tim</b> inherits the living throne; a dozen pretenders load their guns. Win 2 · Draw 1 · Loss 0; points stick to whoever holds a team when its result lands.</div>
+    <h1 class="title">The King is dead,<br><span class="live">and so is a third of the office.</span></h1>
+    <div class="sub">As of <b>Friday 3 July 2026</b> — replayed from <b>trades.txt</b> (63 trades, 85 results). <b>Paulius</b> leads on <b>27.39</b>, but <b>Divisha</b> is just <b>0.95</b> behind after the sharpest run of trading anyone's done all tournament. New this edition: <b class="team">The Graveyard 🪦</b>, the 8 managers who are now mathematically eliminated — no simulation, just cold arithmetic. Win 2 · Draw 1 · Loss 0; points stick to whoever holds a team when its result lands.</div>
   </header>
   <div class="tiles">
-    <div class="tile"><div class="big ro" data-count="23.39">23.39</div><div class="lab">Paulius still leads</div><div class="sm">…but only 2 live team-share left</div></div>
-    <div class="tile"><div class="big em" data-count="20.6">20.6</div><div class="lab">Neil: model title favourite</div><div class="sm">England ×2 · the pocket aces</div></div>
-    <div class="tile"><div class="big am" data-count="21.85">21.85</div><div class="lab">Tim, heir to the board</div><div class="sm">2nd overall · Morocco into the R16</div></div>
-    <div class="tile"><div class="big em" data-count="76">76</div><div class="lab">matches logged</div><div class="sm">4 of the Round of 32 done</div></div>
+    <div class="tile"><div class="big ro" data-count="27.39">27.39</div><div class="lab">Paulius leads</div><div class="sm">by just 0.95 over Divisha</div></div>
+    <div class="tile"><div class="big em" data-count="26.44">26.44</div><div class="lab">Divisha, 2nd</div><div class="sm">up from mid-table a fortnight ago</div></div>
+    <div class="tile"><div class="big am" data-count="8">8</div><div class="lab">managers mathematically out</div><div class="sm">1 in 3 of the office — see The Graveyard</div></div>
+    <div class="tile"><div class="big em" data-count="85">85</div><div class="lab">matches logged</div><div class="sm">3 Round-of-32 ties left tonight</div></div>
   </div>
 
   <section class="report">
-    <div class="epi">“He who fights with monsters should look to it that he himself does not become a monster. And if you gaze long into an abyss, the abyss also gazes into you.”<span class="att">— Friedrich Nietzsche, <em>Beyond Good and Evil</em> (1886)</span></div>
+    <div class="epi">"Alas, poor Yorick! I knew him, Horatio: a fellow of infinite jest, of most excellent fancy… Where be your gibes now? Your gambols? Your songs?"<span class="att">— William Shakespeare, <em>Hamlet</em>, Act V Scene I (the graveyard scene)</span></div>
 
-    <h2>♔ The King is dead</h2>
-    <p class="lede">Look at the top of the table and nothing has changed: <b class="name">Paulius</b> still sits first on <b>23.39</b>, a clear <b>1.54</b> above the field. Look again — closely — and you are staring at a death mask. Of the eight team-shares in his hand, exactly one club still has a pulse (<b class="team">USA ×2</b>). The other six — <b class="dead">Czechia ×2, Uzbekistan ×2, Jordan ×2</b> — are eliminated. His total is no longer a lead. It is a <b>frozen number</b>, a monument to points already banked, with almost no machine left to make more. He is the king of a country that has stopped producing.</p>
-    <p>The model is blunt about it. Run the remaining bracket two hundred thousand times and Paulius converts his table-topping lead into a title only <b class="bad">8.5%</b> of the time — <b>sixth</b> on the win-odds board, behind people he is nominally beating by ten points. A leader who is a 12-to-1 outsider to actually win is not a leader. He is a placeholder.</p>
+    <h2>⚔️ 0.95 — the tightest lead this table has ever shown</h2>
+    <p class="lede">Forget the bracket for a second and just look at the top two rows: <b class="name">Paulius</b> on <b>27.39</b>, <b class="name">Divisha</b> on <b class="good">26.44</b>. That gap is <b class="bad">0.95 of a point</b> — smaller than a single knockout win is worth. Two editions ago Paulius was coasting with a 1.54-point cushion and a hand of corpses; now he's clinging on with his fingertips, and the woman closing him down wasn't even in the top half of the table the last time we wrote one of these.</p>
+    <p>Paulius's book, for the record, is <em>not</em> the walking-dead portfolio it was — his <b class="team">USA ×2</b> survived a man-advantage scare against Bosnia and are through to the Round of 16, so the King actually has a pulse this time. But a two-share pulse is all he's got left; everything else in his hand (Czechia, Uzbekistan, Jordan, all ×2) is in the ground. Divisha, meanwhile, has spent the fortnight doing something much more interesting than sitting still.</p>
 
-    <h3>🗡️ The demons he built with his own hands</h3>
-    <p>Here is the cruel symmetry. Paulius's whole creed was the <em>win–win</em> trade — the deal where both parties walk away smiling, where he skims a little edge and the counterparty gets a team they love. Noble. Sociable. Fatal. Because every counterparty he made happy is now a loaded gun pointed back at him, and the names at the sharp end of the title race are, almost to a man, <b>his own creations</b>:</p>
-    <ul class="bullets">
-      <li><b class="name">Tim</b> — the new face at the top of the living table — is carrying <b class="team">Morocco ×2</b>. One of those Moroccos was <b>sold to him by Paulius on the very first afternoon</b> (5 June, for 2.15). That Morocco just dumped the Netherlands out of the Round of 32 and sits in the last 16. Paulius built the asset that now leads the chase.</li>
-      <li><b class="name">Echo</b>, the man whose climb defies the spreadsheet, holds <b class="team">Canada ×2</b> — one of them <b>handed over by Paulius</b> (17 June) — already through to the Round of 16.</li>
-      <li><b class="name">Divisha</b>'s "fortress," the <b class="team">double-Mexico</b> the whole field now fears, was <b>bought directly from Paulius</b> (16 June, 5.77). He sold her the bricks and she built the wall.</li>
-    </ul>
-    <p>He fought no monsters. He <em>manufactured</em> them, gift-wrapped them, took a small profit, and waved them out the door. Now they gaze back at him from the abyss of the knockout bracket. The abyss, as promised, gazes back.</p>
-
-    <h3>👑 …long live the King</h3>
-    <p>The crown does not sit empty for long. On the living board — strip out the frozen men and rank by who still has teams that can <em>score points</em> — the heir apparent is <b class="name">Tim</b> (<b>21.85</b>, second overall but first among managers still in the fight): a strong, banked book plus <b class="team">Morocco</b> in the last 16 and <b class="team">Argentina</b> still standing. He is the new front-of-house King, and he got there, fittingly, off the old King's own trade.</p>
-    <p>But "long live the King" is a coronation, not a guarantee — because the win-odds model says this is no longer a one-man reign. It is a <b>scrum</b>. The heaviest title artillery belongs to the patient double-stackers Paulius himself names in his exit interview below: <b class="name">Neil</b>'s pocket-aces <b class="team">England ×2</b> (model favourite, <b class="good">20.6%</b>), <b class="name">Kerrill</b>'s <b class="team">Colombia ×2</b> + a fat bank (<b class="good">15.9%</b>), <b class="name">Divisha</b>'s Mexico-and-Spain fortress (<b class="good">14.1%</b>) and <b class="name">Jing</b>'s <b class="team">Switzerland ×2 + Ivory Coast ×2</b> (<b class="good">13.3%</b>). The King is dead. Long live the dozen pretenders.</p>
+    <h3>💸 The fire sale that wasn't — how Divisha bought her way into contention</h3>
+    <p>Two editions ago Divisha was buried mid-table on a leveraged double-Mexico-and-Spain fortress the model loved and the standings didn't. Since then she has run possibly the shrewdest sequence of trades in the office: she sold a Mexico to <b class="name">Giannis</b> for a France and 2.00 cash, flipped Spain to <b class="name">Rohit</b> for a full <b>6.75</b>, sold her spare Cape Verde to <b class="name">Michael</b> for 0.58, and then — in the single best piece of business anyone has done all tournament — traded that same France straight to <b class="name">Dea</b> for <b class="team">Argentina</b>, for a token 0.10.</p>
+    <p>Add it up and Divisha turned a bloated, over-exposed four-team hand into a lean two-team one — <b class="team">Mexico ×1</b> (through to the Round of 16) and <b class="team">Argentina ×1</b> (unbeaten, 9 goals in 3, Messi playing the football of his life) — while banking a fat <b>3.44</b> cash cushion along the way. She cashed in the parts of the fortress that were about to get expensive to hold and bought the reigning champions for pocket change. It is the single reason she is 0.95 behind the leader instead of sixteen places back.</p>
   </section>
 
-  <section class="report tight">
-    <h2>📈 The title race · who can actually win now</h2>
-    <p class="lede">Title odds from a <b>200,000-run Monte-Carlo</b> over the remaining knockout bracket — each tie resolved by a logistic on the two teams' pre-tournament expected value, every knockout win banking <b>+2 per share</b> to its current holder. It rewards the only thing left that matters: <b>live teams, doubled up, with a path</b>. Banked points set the floor; live shares set the ceiling. (Managers below 0.25% omitted.)</p>
-    <div class="prow">
-      <div class="pn">Neil</div>
-      <div class="ptrack"><div class="pbar b-hi" style="width:100.0%"><span class="pv">20.6%</span></div></div>
-      <div class="pteams">🏴󠁧󠁢󠁥󠁮󠁧󠁿England×2</div>
+  <section class="report graveyard-section">
+    <h2>🪦 Introducing: The Graveyard</h2>
+    <p class="lede">New feature this edition, and a grim one. With the Round of 32 all but finished, we can now say — for real, no dice rolled, no simulation run — exactly who <b class="bad">cannot possibly win this pool anymore</b>, even in a world where every live share they own wins every remaining match. Cash is fixed. Banked points never get clawed back. That means the current leader's total, <b>27.39</b>, is a hard floor nobody above it can ever fall below — and if your absolute best-case ceiling can't clear that floor, you're out. No opinions, just arithmetic.</p>
+    <p><b class="bad">8 of the 24 managers in this office — a full third of the field</b> — already meet that bar. Four went down in a single brutal window on <b>30 June</b>, when Germany/Japan/South Africa fell inside 24 hours and Iran, Iraq and Panama quietly bowed out of the groups on the same day. Three more followed in today's Round-of-32 procession. Tap a headstone to find out who's under it, and how they died.</p>
+    <div class="gravecontrols">
+      <span class="gcount" id="gcount">0 / 8 exhumed</span>
+      <button class="digall" id="digall" type="button">⛏ Exhume everyone</button>
     </div>
-<div class="prow">
-      <div class="pn">Kerrill</div>
-      <div class="ptrack"><div class="pbar b-hi" style="width:77.1%"><span class="pv">15.9%</span></div></div>
-      <div class="pteams">🇨🇴Colombia×2</div>
-    </div>
-<div class="prow">
-      <div class="pn">Divisha</div>
-      <div class="ptrack"><div class="pbar b-hi" style="width:68.7%"><span class="pv">14.1%</span></div></div>
-      <div class="pteams">🇪🇸Spain, 🇲🇽Mexico×2, 🇨🇻Cape Verde</div>
-    </div>
-<div class="prow">
-      <div class="pn">Jing</div>
-      <div class="ptrack"><div class="pbar b-hi" style="width:64.8%"><span class="pv">13.3%</span></div></div>
-      <div class="pteams">🇨🇭Switzerland×2, 🇨🇮Ivory Coast×2</div>
-    </div>
-<div class="prow">
-      <div class="pn">Haydee</div>
-      <div class="ptrack"><div class="pbar b-mid" style="width:42.7%"><span class="pv">8.8%</span></div></div>
-      <div class="pteams">🇪🇬Egypt×2, 🇨🇩DR Congo×2</div>
-    </div>
-<div class="prow">
-      <div class="pn">Paulius</div>
-      <div class="ptrack"><div class="pbar b-mid" style="width:41.1%"><span class="pv">8.5%</span></div></div>
-      <div class="pteams">🇺🇸USA×2</div>
-    </div>
-<div class="prow">
-      <div class="pn">Echo</div>
-      <div class="ptrack"><div class="pbar b-mid" style="width:32.7%"><span class="pv">6.7%</span></div></div>
-      <div class="pteams">🇨🇦Canada×2, 🇩🇿Algeria×2</div>
-    </div>
-<div class="prow">
-      <div class="pn">Kwan</div>
-      <div class="ptrack"><div class="pbar b-mid" style="width:31.0%"><span class="pv">6.4%</span></div></div>
-      <div class="pteams">🇵🇹Portugal×2</div>
-    </div>
-<div class="prow">
-      <div class="pn">Tim</div>
-      <div class="ptrack"><div class="pbar b-lo" style="width:17.6%"><span class="pv">3.6%</span></div></div>
-      <div class="pteams">🇦🇷Argentina, 🇲🇦Morocco×2</div>
-    </div>
-<div class="prow">
-      <div class="pn">Elaine</div>
-      <div class="ptrack"><div class="pbar b-lo" style="width:4.5%"><span class="pv">0.9%</span></div></div>
-      <div class="pteams">🇧🇷Brazil, 🇭🇷Croatia, 🇸🇪Sweden×2</div>
-    </div>
-<div class="prow">
-      <div class="pn">May</div>
-      <div class="ptrack"><div class="pbar b-lo" style="width:3.3%"><span class="pv">0.7%</span></div></div>
-      <div class="pteams">🇧🇦Bosnia &amp; H.×2</div>
-    </div>
-<div class="prow">
-      <div class="pn">Michael</div>
-      <div class="ptrack"><div class="pbar b-lo" style="width:2.0%"><span class="pv">0.3%</span></div></div>
-      <div class="pteams">🇵🇾Paraguay×2, 🇨🇻Cape Verde</div>
-    </div>
-    <p class="foot-note">Why the table leader (Paulius, 8.5%) sits sixth: a lead made of <em>eliminated</em> teams cannot grow. Why the model loves names mid-table: a doubled strong team that runs deep adds points four at a time. Ceiling beats cushion.</p>
+    <div class="graveyard-grid">
+    <button class="grave" data-idx="0" aria-expanded="false">
+      <div class="grave-face">
+        <span class="cross">✝</span>
+        <span class="qmark">?</span>
+        <span class="hint">tap to exhume</span>
+      </div>
+      <div class="grave-back">
+        <div class="rip">R.I.P.</div>
+        <div class="gname">Matt</div>
+        <div class="gtotal">15.52 pts — frozen forever</div>
+        <div class="gcause">☠ 🇯🇵 <b>Japan</b> fell — Brazil 2–1 Japan · Round of 32 · Tuesday 30 June</div>
+        <div class="gepitaph">THE ONE-DAY MASSACRE. Germany, Japan and South Africa all fell in the same 24-hour window — the single worst day anyone in this office has had. New Zealand was already dead weight. Whole book, gone before lunch.</div>
+      </div>
+    </button>
+    <button class="grave" data-idx="1" aria-expanded="false">
+      <div class="grave-face">
+        <span class="cross">✝</span>
+        <span class="qmark">?</span>
+        <span class="hint">tap to exhume</span>
+      </div>
+      <div class="grave-back">
+        <div class="rip">R.I.P.</div>
+        <div class="gname">Mike</div>
+        <div class="gtotal">12.78 pts — frozen forever</div>
+        <div class="gcause">☠ 🇮🇶 <b>Iraq</b> fell — Senegal 5–0 Iraq · Group · Tuesday 30 June</div>
+        <div class="gepitaph">The last of a four-team graveyard shift (Turkey, South Africa, Qatar, Iraq) that never had a live share to its name.</div>
+      </div>
+    </button>
+    <button class="grave" data-idx="2" aria-expanded="false">
+      <div class="grave-face">
+        <span class="cross">✝</span>
+        <span class="qmark">?</span>
+        <span class="hint">tap to exhume</span>
+      </div>
+      <div class="grave-back">
+        <div class="rip">R.I.P.</div>
+        <div class="gname">Kelvin</div>
+        <div class="gtotal">17.91 pts — frozen forever</div>
+        <div class="gcause">☠ 🇪🇨 <b>Ecuador</b> fell — Mexico 2–0 Ecuador · Round of 32 · Friday 3 July</div>
+        <div class="gepitaph">A three-continent portfolio, felled on a single continent. He swapped a still-breathing France for Dea's Croatia ten minutes before Croatia flatlined — the math says it wouldn't have saved him anyway.</div>
+      </div>
+    </button>
+    <button class="grave" data-idx="3" aria-expanded="false">
+      <div class="grave-face">
+        <span class="cross">✝</span>
+        <span class="qmark">?</span>
+        <span class="hint">tap to exhume</span>
+      </div>
+      <div class="grave-back">
+        <div class="rip">R.I.P.</div>
+        <div class="gname">Elaine</div>
+        <div class="gtotal">16.69 pts — frozen forever</div>
+        <div class="gcause">☠ 🇭🇷 <b>Croatia</b> fell — Portugal 2–1 Croatia · Round of 32 · Friday 3 July</div>
+        <div class="gepitaph">Died holding the same Croatia her old trading partner Kelvin also died holding — the pair swapped it between themselves back on 11 June. Brazil is still out there fighting. It was never going to be enough alone.</div>
+      </div>
+    </button>
+    <button class="grave" data-idx="4" aria-expanded="false">
+      <div class="grave-face">
+        <span class="cross">✝</span>
+        <span class="qmark">?</span>
+        <span class="hint">tap to exhume</span>
+      </div>
+      <div class="grave-back">
+        <div class="rip">R.I.P.</div>
+        <div class="gname">AJ</div>
+        <div class="gtotal">13.47 pts — frozen forever</div>
+        <div class="gcause">☠ 🇳🇱 <b>Netherlands</b> fell — Netherlands 1–1 Morocco · Round of 32 · Tuesday 30 June</div>
+        <div class="gepitaph">The office still remembers the exact moment: <em>'Kluivert hit the post 😡'</em> — 9:09am, the width of a woodwork sample from a different bracket entirely.</div>
+      </div>
+    </button>
+    <button class="grave" data-idx="5" aria-expanded="false">
+      <div class="grave-face">
+        <span class="cross">✝</span>
+        <span class="qmark">?</span>
+        <span class="hint">tap to exhume</span>
+      </div>
+      <div class="grave-back">
+        <div class="rip">R.I.P.</div>
+        <div class="gname">Josh</div>
+        <div class="gtotal">12.98 pts — frozen forever</div>
+        <div class="gcause">☠ 🇮🇷 <b>Iran</b> fell — Egypt 1–1 Iran · Group · Tuesday 30 June</div>
+        <div class="gepitaph">Died without a single knockout match — Iran drew their way out of the tournament, three scrappy draws and out on the placings. No shootout, no drama, just arithmetic.</div>
+      </div>
+    </button>
+    <button class="grave" data-idx="6" aria-expanded="false">
+      <div class="grave-face">
+        <span class="cross">✝</span>
+        <span class="qmark">?</span>
+        <span class="hint">tap to exhume</span>
+      </div>
+      <div class="grave-back">
+        <div class="rip">R.I.P.</div>
+        <div class="gname">May</div>
+        <div class="gtotal">15.26 pts — frozen forever</div>
+        <div class="gcause">☠ 🇧🇦 <b>Bosnia &amp; H.</b> fell — USA 2–0 Bosnia &amp; H. · Round of 32 · Friday 3 July</div>
+        <div class="gepitaph">The second half of a Germany/Bosnia double-elimination special. No shares left standing, no path back.</div>
+      </div>
+    </button>
+    <button class="grave" data-idx="7" aria-expanded="false">
+      <div class="grave-face">
+        <span class="cross">✝</span>
+        <span class="qmark">?</span>
+        <span class="hint">tap to exhume</span>
+      </div>
+      <div class="grave-back">
+        <div class="rip">R.I.P.</div>
+        <div class="gname">Simon</div>
+        <div class="gtotal">5.30 pts — frozen forever</div>
+        <div class="gcause">☠ 🇵🇦 <b>Panama</b> fell — Panama 0–2 England · Group · Tuesday 30 June</div>
+        <div class="gepitaph">Already dead last on the table before this even landed. He still has a living Australia share tonight. It will not be enough. It was never going to be enough.</div>
+      </div>
+    </button></div>
+    <p class="foot-note">Closest call: <b class="name">Giannis</b> survives by the thinnest of margins — a ceiling just <b class="good">+0.35</b> above the floor. One more of their live shares going down and we may be digging a ninth grave next edition.</p>
   </section>
 
   <section class="report">
-    <h2>🪦 Michael Brown — Back From the Dead</h2>
-    <p class="lede">Everybody had buried <b class="name">Michael</b>. The low-EV bonfire — Senegal, double-Saudi, Scotland, Cape Verde — the negative bank, the dead-money reputation. The eulogies were written. Then Germany happened.</p>
-    <p>His <b class="team">Paraguay ×2</b> walked into the Round of 32 as 41st-ranked lottery tickets against a top-ten machine — and walked out winners on penalties, in <b>what Al Jazeera called "potentially the greatest upset in World Cup history."</b> Kai Havertz, ashen: <em>"I'm lost for words… we've blown it twice."</em> For Michael it was the opposite of words — it was <b>two shares marching into the last 16</b> when his tournament was supposed to be over. The man threw the ball up with his eyes shut and watched it drop straight through the net.</p>
-    <p>Be clear-eyed: he is still <b>hanging by a thread</b>. The model gives him a fraction of a percent; one Cape Verde share and a double-Paraguay is not a campaign. But it is a <b>pulse</b>, and a thread is a thread — it holds right up until it doesn't. The door everyone slammed on him is now <b>ajar</b>. Underestimate the dead man at your peril; he has already done the one thing nobody priced.</p>
+    <h2>🎙️ Two minutes with Dea — the quiet double-France heist</h2>
+    <p class="lede">While the office was busy watching Divisha's fire sale, <b class="name">Dea</b> ran a quieter two-trade heist of her own: her Croatia to <b class="name">Kelvin</b> for a France on 11 June, then her Argentina to Divisha for a second France just this week. She sits 16th today on <b>16.03</b>, but <b class="team">France ×2</b> is fully alive with four knockout rounds still to run — as live a ceiling as almost anyone outside the top five. We caught up with her.</p>
 
     <div class="miniint">
-      <div class="mihead">🎙️ Two minutes with the resurrected man</div>
-      <div class="qa"><p class="q">So Michael, there has been a lot of talk recently about how you destroyed your chances in these past couple of weeks. What would you say to them now?</p>
-      <p class="a">A lot of people say a lot of things half way through the game, but our focus is always the end result — and that's what we are gonna deliver.</p></div>
-      <div class="qa"><p class="q">In the recent extra, it was shown that you might have been better off if you had never traded. Any comments on this sentiment?</p>
-      <p class="a">I think when you see the trading that other people have done, it was essential to make moves and take advantage of situations — to both optimize your outcomes and also defend yourself from being disadvantaged. And ultimately, ultimately, the end result will be what matters, and we will see where we end up.</p></div>
+      <div class="qa"><p class="q">How do you feel about Croatia – France? It caused a lot of suspicion around the office regarding "secret" lunch deals.</p>
+      <p class="a" data-speaker="DEA">Feeling like a superpower boon was handed to me — guess I'm just the favourite, isn't it? Also, offering to work Saturdays is way more appealing than lunch deals, but I assure you no side letters were signed, and you can't really trick a man who's on the Ethics committee himself. All this talk about lunch deals reminds me of our overdue team lunch — knock knock, Kelvin?</p></div>
+      <div class="qa"><p class="q">You managed to flip your Argentina for a double France, bringing you back from the dead and giving you a real shot at the title. How did you manage that?</p>
+      <p class="a" data-speaker="DEA">Read somewhere: "Plans succeed through good counsel; don't go to war without wise advice." So the credit goes to my advisory counsel, who helped me pull this off — an extraordinary gadget known as Claude. Have you heard of it?</p></div>
+      <div class="qa"><p class="q">Who are you most afraid of, in terms of competitors?</p>
+      <p class="a" data-speaker="DEA">Things flip overnight around here — there might be some secret spies laying low who could pop off any time — but the obvious one is Divisha. She's been writing out contracts, so I've got to stay a step ahead of her at all times.</p></div>
     </div>
   </section>
 
   <section class="report wide">
-    <h2>🗺️ The knockout bracket · group stage is over</h2>
-    <p class="lede">Forty-eight became thirty-two. Groups A–L ran exactly to the real 2026 draw, and the Round of 32 follows the official FIFA template — the four ties already played (in <b class="good">green</b>) confirm it to the letter. The whole <b>top quarter has already crystallised</b>: Canada, Paraguay, Morocco and Brazil are through, and the bracket has paired them into an all-office last-16 war — <b class="name">Echo</b>'s Canada vs <b class="name">Michael</b>'s Paraguay, <b class="name">Tim</b>'s Morocco vs <b class="name">Elaine/CJ</b>'s Brazil. Owners are shown under each team; ties marked <span class="bsc proj" style="position:static">proj</span> are the FIFA third-place allocation, awaiting kick-off.</p>
+    <h2>🗺️ The knockout bracket · 13 of 16 Round-of-32 ties played</h2>
+    <p class="lede">Correction from last edition: the two "projected" third-place ties didn't land the way we guessed. Belgium's third-place opponent turned out to be <b class="team">Senegal</b>, not Algeria (won 3–2); Switzerland's was <b class="team">Algeria</b>, not Iran (won 2–0) — Iran, in fact, never made the cut at all, going out on three group-stage draws. Bracket below is now corrected against the real, live tournament. Three ties kick off <b>tonight</b>: <b class="team">Argentina v Cape Verde</b> (Miami), <b class="team">Colombia v Ghana</b> (Kansas City) and <b class="team">Australia v Egypt</b> (Arlington) — the smallest nation ever to reach a men's World Cup knockout stage against the tournament's all-time leading scorer, and two sides each chasing a first-ever knockout win in the other two. The confirmed Round of 16 draw already has one unmissable header: <b class="team">Mexico v England</b>.</p>
     
 <div class="bracket-scroll">
   <div class="bracket">
-    <div class="bcol"><div class="brh">Round of 32</div><div class="bmatch"><div class="bmhead"><span class="bmno">M73</span><span class="bsc">0–1</span></div><div class="bteam lost"><span class="bfl">🇿🇦</span><span class="bn">South Africa</span><span class="bown">Matt · Mike</span></div><div class="bteam won"><span class="bfl">🇨🇦</span><span class="bn">Canada</span><span class="bown">Echo×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M74</span><span class="bsc">1–1 (p)</span></div><div class="bteam lost"><span class="bfl">🇩🇪</span><span class="bn">Germany</span><span class="bown">Matt · May</span></div><div class="bteam won"><span class="bfl">🇵🇾</span><span class="bn">Paraguay</span><span class="bown">Michael×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M75</span><span class="bsc">1–1 (p)</span></div><div class="bteam lost"><span class="bfl">🇳🇱</span><span class="bn">Netherlands</span><span class="bown">AJ×2</span></div><div class="bteam won"><span class="bfl">🇲🇦</span><span class="bn">Morocco</span><span class="bown">Tim×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M76</span><span class="bsc">2–1</span></div><div class="bteam won"><span class="bfl">🇧🇷</span><span class="bn">Brazil</span><span class="bown">Elaine · CJ</span></div><div class="bteam lost"><span class="bfl">🇯🇵</span><span class="bn">Japan</span><span class="bown">Matt · Kelvin</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M77</span><span class="bsc proj">proj</span></div><div class="bteam"><span class="bfl">🇫🇷</span><span class="bn">France</span><span class="bown">Giannis · Kelvin</span></div><div class="bteam"><span class="bfl">🇸🇪</span><span class="bn">Sweden</span><span class="bown">Elaine×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M78</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇨🇮</span><span class="bn">Ivory Coast</span><span class="bown">Jing×2</span></div><div class="bteam"><span class="bfl">🇳🇴</span><span class="bn">Norway</span><span class="bown">Pak · Rohit</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M79</span><span class="bsc proj">proj</span></div><div class="bteam"><span class="bfl">🇲🇽</span><span class="bn">Mexico</span><span class="bown">Divisha×2</span></div><div class="bteam"><span class="bfl">🇪🇨</span><span class="bn">Ecuador</span><span class="bown">Margot · Kelvin</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M80</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="bn">England</span><span class="bown">Neil×2</span></div><div class="bteam"><span class="bfl">🇨🇩</span><span class="bn">DR Congo</span><span class="bown">Haydee×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M81</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇺🇸</span><span class="bn">USA</span><span class="bown">Paulius×2</span></div><div class="bteam"><span class="bfl">🇧🇦</span><span class="bn">Bosnia &amp; H.</span><span class="bown">May×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M82</span><span class="bsc proj">proj</span></div><div class="bteam"><span class="bfl">🇧🇪</span><span class="bn">Belgium</span><span class="bown">Pak · Margot</span></div><div class="bteam"><span class="bfl">🇩🇿</span><span class="bn">Algeria</span><span class="bown">Echo×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M83</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇵🇹</span><span class="bn">Portugal</span><span class="bown">Kwan×2</span></div><div class="bteam"><span class="bfl">🇭🇷</span><span class="bn">Croatia</span><span class="bown">Dea · Elaine</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M84</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇪🇸</span><span class="bn">Spain</span><span class="bown">Divisha · Rohit</span></div><div class="bteam"><span class="bfl">🇦🇹</span><span class="bn">Austria</span><span class="bown">Giannis · CJ</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M85</span><span class="bsc proj">proj</span></div><div class="bteam"><span class="bfl">🇨🇭</span><span class="bn">Switzerland</span><span class="bown">Jing×2</span></div><div class="bteam"><span class="bfl">🇮🇷</span><span class="bn">Iran</span><span class="bown">Josh×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M86</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇦🇷</span><span class="bn">Argentina</span><span class="bown">Dea · Tim</span></div><div class="bteam"><span class="bfl">🇨🇻</span><span class="bn">Cape Verde</span><span class="bown">Michael · Divisha</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M87</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇨🇴</span><span class="bn">Colombia</span><span class="bown">Kerrill×2</span></div><div class="bteam"><span class="bfl">🇬🇭</span><span class="bn">Ghana</span><span class="bown">Josh · CJ</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M88</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇦🇺</span><span class="bn">Australia</span><span class="bown">Simon · Margot</span></div><div class="bteam"><span class="bfl">🇪🇬</span><span class="bn">Egypt</span><span class="bown">Haydee×2</span></div></div></div>
-    <div class="bcol"><div class="brh">Round of 16</div><div class="bmatch"><div class="bmhead"><span class="bmno">M89</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇨🇦</span><span class="bn">Canada</span><span class="bown">Echo×2</span></div><div class="bteam"><span class="bfl">🇵🇾</span><span class="bn">Paraguay</span><span class="bown">Michael×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M90</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇲🇦</span><span class="bn">Morocco</span><span class="bown">Tim×2</span></div><div class="bteam"><span class="bfl">🇧🇷</span><span class="bn">Brazil</span><span class="bown">Elaine · CJ</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M91</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M77</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M78</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M92</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M79</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M80</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M93</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M83</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M84</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M94</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M85</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M86</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M95</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M81</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M82</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M96</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M87</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M88</span></div></div></div>
+    <div class="bcol"><div class="brh">Round of 32</div><div class="bmatch"><div class="bmhead"><span class="bmno">M73</span><span class="bsc">0–1</span></div><div class="bteam lost"><span class="bfl">🇿🇦</span><span class="bn">South Africa</span><span class="bown">Matt · Mike</span></div><div class="bteam won"><span class="bfl">🇨🇦</span><span class="bn">Canada</span><span class="bown">Echo×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M74</span><span class="bsc">1–1 (p)</span></div><div class="bteam lost"><span class="bfl">🇩🇪</span><span class="bn">Germany</span><span class="bown">Matt · May</span></div><div class="bteam won"><span class="bfl">🇵🇾</span><span class="bn">Paraguay</span><span class="bown">Michael×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M75</span><span class="bsc">1–1 (p)</span></div><div class="bteam lost"><span class="bfl">🇳🇱</span><span class="bn">Netherlands</span><span class="bown">AJ×2</span></div><div class="bteam won"><span class="bfl">🇲🇦</span><span class="bn">Morocco</span><span class="bown">Tim×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M76</span><span class="bsc">2–1</span></div><div class="bteam won"><span class="bfl">🇧🇷</span><span class="bn">Brazil</span><span class="bown">Elaine · CJ</span></div><div class="bteam lost"><span class="bfl">🇯🇵</span><span class="bn">Japan</span><span class="bown">Matt · Kelvin</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M77</span><span class="bsc">3–0</span></div><div class="bteam won"><span class="bfl">🇫🇷</span><span class="bn">France</span><span class="bown">Dea×2</span></div><div class="bteam lost"><span class="bfl">🇸🇪</span><span class="bn">Sweden</span><span class="bown">Elaine×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M78</span><span class="bsc">1–2</span></div><div class="bteam lost"><span class="bfl">🇨🇮</span><span class="bn">Ivory Coast</span><span class="bown">Jing×2</span></div><div class="bteam won"><span class="bfl">🇳🇴</span><span class="bn">Norway</span><span class="bown">Pak · Rohit</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M79</span><span class="bsc">2–0</span></div><div class="bteam won"><span class="bfl">🇲🇽</span><span class="bn">Mexico</span><span class="bown">Giannis · Divisha</span></div><div class="bteam lost"><span class="bfl">🇪🇨</span><span class="bn">Ecuador</span><span class="bown">Margot · Kelvin</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M80</span><span class="bsc">2–1</span></div><div class="bteam won"><span class="bfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="bn">England</span><span class="bown">Neil×2</span></div><div class="bteam lost"><span class="bfl">🇨🇩</span><span class="bn">DR Congo</span><span class="bown">Haydee×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M81</span><span class="bsc">2–0</span></div><div class="bteam won"><span class="bfl">🇺🇸</span><span class="bn">USA</span><span class="bown">Paulius×2</span></div><div class="bteam lost"><span class="bfl">🇧🇦</span><span class="bn">Bosnia &amp; H.</span><span class="bown">May×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M82</span><span class="bsc">3–2</span></div><div class="bteam won"><span class="bfl">🇧🇪</span><span class="bn">Belgium</span><span class="bown">Pak · Margot</span></div><div class="bteam lost"><span class="bfl">🇸🇳</span><span class="bn">Senegal</span><span class="bown">Michael · Simon</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M83</span><span class="bsc">2–1</span></div><div class="bteam won"><span class="bfl">🇵🇹</span><span class="bn">Portugal</span><span class="bown">Kwan×2</span></div><div class="bteam lost"><span class="bfl">🇭🇷</span><span class="bn">Croatia</span><span class="bown">Kelvin · Elaine</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M84</span><span class="bsc">3–0</span></div><div class="bteam won"><span class="bfl">🇪🇸</span><span class="bn">Spain</span><span class="bown">Rohit×2</span></div><div class="bteam lost"><span class="bfl">🇦🇹</span><span class="bn">Austria</span><span class="bown">Giannis · CJ</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M85</span><span class="bsc">2–0</span></div><div class="bteam won"><span class="bfl">🇨🇭</span><span class="bn">Switzerland</span><span class="bown">Jing×2</span></div><div class="bteam lost"><span class="bfl">🇩🇿</span><span class="bn">Algeria</span><span class="bown">Echo×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M86</span><span class="bsc tbd">tonight</span></div><div class="bteam"><span class="bfl">🇦🇷</span><span class="bn">Argentina</span><span class="bown">Divisha · Tim</span></div><div class="bteam"><span class="bfl">🇨🇻</span><span class="bn">Cape Verde</span><span class="bown">Michael×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M87</span><span class="bsc tbd">tonight</span></div><div class="bteam"><span class="bfl">🇨🇴</span><span class="bn">Colombia</span><span class="bown">Kerrill×2</span></div><div class="bteam"><span class="bfl">🇬🇭</span><span class="bn">Ghana</span><span class="bown">Josh · CJ</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M88</span><span class="bsc tbd">tonight</span></div><div class="bteam"><span class="bfl">🇦🇺</span><span class="bn">Australia</span><span class="bown">Simon · Margot</span></div><div class="bteam"><span class="bfl">🇪🇬</span><span class="bn">Egypt</span><span class="bown">Haydee×2</span></div></div></div>
+    <div class="bcol"><div class="brh">Round of 16</div><div class="bmatch"><div class="bmhead"><span class="bmno">M89</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇵🇾</span><span class="bn">Paraguay</span><span class="bown">Michael×2</span></div><div class="bteam"><span class="bfl">🇫🇷</span><span class="bn">France</span><span class="bown">Dea×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M90</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇨🇦</span><span class="bn">Canada</span><span class="bown">Echo×2</span></div><div class="bteam"><span class="bfl">🇲🇦</span><span class="bn">Morocco</span><span class="bown">Tim×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M91</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇧🇷</span><span class="bn">Brazil</span><span class="bown">Elaine · CJ</span></div><div class="bteam"><span class="bfl">🇳🇴</span><span class="bn">Norway</span><span class="bown">Pak · Rohit</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M92</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇲🇽</span><span class="bn">Mexico</span><span class="bown">Giannis · Divisha</span></div><div class="bteam"><span class="bfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="bn">England</span><span class="bown">Neil×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M93</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇵🇹</span><span class="bn">Portugal</span><span class="bown">Kwan×2</span></div><div class="bteam"><span class="bfl">🇪🇸</span><span class="bn">Spain</span><span class="bown">Rohit×2</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M94</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇺🇸</span><span class="bn">USA</span><span class="bown">Paulius×2</span></div><div class="bteam"><span class="bfl">🇧🇪</span><span class="bn">Belgium</span><span class="bown">Pak · Margot</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M95</span><span class="bsc tbd">tbd</span></div><div class="bteam"><span class="bfl">🇨🇭</span><span class="bn">Switzerland</span><span class="bown">Jing×2</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M87</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M96</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M86</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M88</span></div></div></div>
     <div class="bcol"><div class="brh">Quarter-finals</div><div class="bmatch"><div class="bmhead"><span class="bmno">M97</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M89</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M90</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M98</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M91</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M92</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M99</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M93</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M94</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M100</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M95</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M96</span></div></div></div>
     <div class="bcol"><div class="brh">Semi-finals</div><div class="bmatch"><div class="bmhead"><span class="bmno">M101</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M97</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M98</span></div></div><div class="bmatch"><div class="bmhead"><span class="bmno">M102</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M99</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M100</span></div></div></div>
     <div class="bcol fin"><div class="brh">Final · 19 Jul</div><div class="bmatch"><div class="bmhead"><span class="bmno">M104</span><span class="bsc tbd">tbd</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M101</span></div><div class="bteam tbd"><span class="bn">winner&nbsp;M102</span></div></div>
@@ -279,99 +336,62 @@
     </div>
   </div>
 </div>
-    <p class="foot-note">Scroll sideways to follow the bracket to the Final. Winner of each match advances right; the four played Round-of-32 results are locked, everything beyond is still to be decided.</p>
-  </section>
-
-  <section class="report interview">
-    <h2>🎙️ The exit interview · Paulius, the deposed</h2>
-    <p class="lede">We sat the former leader down while his lead was still technically intact and his hopes were not. What followed was equal parts trading-desk post-mortem, patriotic grievance, and scouting report on the men who took his throne. Transcript, lightly edited.</p>
-
-    <div class="qa"><p class="q">Four of your names went down — Uzbekistan, Jordan, Czechia, and the USA. Consecutive losses. Talk us through that stretch.</p>
-    <p class="a">It was like watching four positions get margin-called on the same morning. Uzbekistan and Jordan were always lottery tickets, fine, I'd priced that. But the USA was a core holding. Czechia too. When your blue-chips and your moonshots blow up in the same window, that's not bad luck, that's correlation you didn't model.</p></div>
-
-    <div class="qa"><p class="q">Tim is now the clear frontrunner. Is the title gone?</p>
-    <p class="a">Tim has the better book right now — his Sales derby win over Netherlands was huge for his chances. But "frontrunner" with a third of the tournament left is not "champion." If Tim wants this, he has to actually hold his lead through the bracket. Leads are easier to take than to keep. I'd know — I just demonstrated it.</p></div>
-
-    <div class="qa"><p class="q">That win came at your expense, though. Does it sting more losing the lead to Tim specifically?</p>
-    <p class="a">Here's the part that actually hurts. Tim's American. I'm the one holding the USA — I bought the flag, I'm flying it, I'm the patriot in this building. And when the USA went down against Turkey, he's the one who came out ahead. The American sat back and let the Lithuanian carry the Stars and Stripes straight into a loss that paid him. There's no justice in that. I did the believing; he banked the dividend.</p></div>
-
-    <div class="qa"><p class="q">Out to Turkey, of all teams. Did you see that one coming?</p>
-    <p class="a">Nobody had Turkey on the card. That's the cruelty of it — it wasn't Brazil, it wasn't France, it wasn't a result you could shrug off as "well, they ran into a giant." It was Turkey. I held the Stars and Stripes against Turkey and lost, and somewhere across the floor the actual American didn't lose a wink of sleep because for him it was just points going green. I took the patriotic risk. He collected the patriotic reward. Same flag, opposite outcomes.</p></div>
-
-    <div class="qa"><p class="q">So you're saying he should've been the one holding USA?</p>
-    <p class="a">By every law of decency, yes. Instead I get the heartbreak and he gets the points. I'm out here more invested in his national team than he is. I should be granted green card for this.</p></div>
-
-    <div class="qa"><p class="q">Beyond your own table, what do you make of how the rest of the field is faring?</p>
-    <p class="a">Mixed carnage. Michael's the one I can't look away from — he got a hail-mary out of Germany that had no business landing. That's a man who threw the ball up with his eyes closed and watched it go in. Good for him. But let's be honest about what he is: he's hanging by a thread. One result keeping him alive doesn't make a campaign. He's not playing the bracket, he's surviving it one heartbeat at a time, and a thread is a thread — it holds right up until it doesn't.</p></div>
-
-    <div class="qa"><p class="q">And Matt? He's gone entirely.</p>
-    <p class="a">Matt got deleted. Twenty-four hours. Germany, Japan, and South Africa all eliminated inside a single day, and his whole book went with them. That's not a drawdown, that's a margin call that wiped the account before he could even pick up the phone. At least I'm bleeding out slowly — I get to suffer in stages, do the math, feel each one. Matt didn't even get the courtesy of a long goodbye. One bad day on the calendar and the tournament closed his position for him.</p></div>
-
-    <div class="qa"><p class="q">Forget Tim for a second. Who else scares you? Who's the one you're watching over your shoulder?</p>
-    <p class="a">Tim's the leader, but he's not the only loaded gun at this table. Divisha is holding a monster — double Mexico and Spain. That's not a hand, that's a fortress. If those names run, she doesn't need anything to break her way; she just collects. Then Neil's — the man's sitting on double England, pocket aces. England gets a soft bracket and he's printing money while the rest of us scramble. And don't sleep on Kerrill: 2× Colombia plus a fat stack of cash, plus him calling the top on Uruguay. A loaded hand + smart trading is scary.</p></div>
-
-    <div class="qa"><p class="q">So it's the big stacks you fear.</p>
-    <p class="a">Mostly — but that's the rookie mistake, only watching the leaders. I won't discount the underdogs. Jing and Haydee are both sitting on hands nobody's pricing properly. And then there's Echo, whose climb up the table makes no probabilistic sense, which is precisely why I respect it. You can model the favourites; you cannot model the guy who just keeps catching the result he needs. I'm not betting on Echo — but I'm absolutely watching him.</p></div>
-
-    <div class="qa"><p class="q">Looking ahead — which upcoming fixtures are you circling on the calendar?</p>
-    <p class="a">There's one I genuinely can't take my eyes off: Echo versus Tim. The US Office derby — Canada against Morocco. And let me correct any impression that I'm neutral here, because I am desperately not. I need Echo's Canada to win. Canada beating Morocco is how Tim gets stopped — it's the single result that caps the runaway leader before he disappears over the horizon. So no popcorn, no theatre. I'm a Canada man now, fully, shamelessly. Go Echo. Bury him.</p></div>
-
-    <div class="qa"><p class="q">A strange position — rooting for a rival to take down the leader.</p>
-    <p class="a">That's tail-player life. I can't catch Tim by being good; I can only catch him if someone else knocks him down. Echo's Canada is my proxy army. I don't gain a point from that match directly — but every dent in Tim's lead is oxygen for my fifteen percent. The enemy of my enemy is a Canadian. I've made peace with it.</p></div>
-
-    <div class="qa"><p class="q">And the fixture that scares you most?</p>
-    <p class="a">Bosnia. May's holding double Bosnia, and this isn't about her climbing the table — she might not move much at all. It's about me. If Bosnia wins, I'm basically eliminated. Done. That's the result that doesn't bruise my book, it ends it. Everyone's watching the top of the table; I'm watching Bosnia, because that's the single fixture standing between me and a clean exit. My whole remaining fifteen percent is riding on Bosnia not getting the result. The match that decides your tournament is rarely the one you're in — it's the one that quietly holds the knife.</p></div>
+    <p class="foot-note">Scroll sideways to follow the bracket to the Final. Owners are shown under each team; the real R16 draw crosses the bracket in ways the R32 numbering doesn't suggest — M89 is Paraguay v France, for instance, not the two teams either side of it.</p>
   </section>
 
   <section class="report">
-    <h2>📰 Match report · the carnage, the fairy tales, the fallen</h2>
-    <p class="lede">The group stage closed and the Round of 32 opened with the kind of fortnight that rewrites cards and ends careers. Here is the football, with one eye on the office ledger it keeps detonating.</p>
+    <h2>📰 Match report · Round of 32, a Golden Boot race, and one genuine controversy</h2>
+    <p class="lede">Thirteen of sixteen last-32 ties are done, the Golden Boot race has turned into a two-horse sprint, and the tournament produced its first proper refereeing storm. Here's the football — with an eye, as always, on the office ledger it keeps rewriting.</p>
 
-    <h3>💥 The upset that swallowed the headlines — Paraguay knock out Germany</h3>
-    <p>1–1, then penalties, then bedlam. <b class="team">Germany</b> — top-ten, four-time champions — are <b class="bad">out in the Round of 32</b>, and the football world reached for superlatives: <b>"potentially the greatest upset in World Cup history"</b> (Al Jazeera), Germany's first-ever World Cup shootout defeat. A German goal chalked off by VAR; <b class="name">Klopp</b>, incandescent on MagentaTV: <em>"If that goal is illegal, then Arsenal won't be English champions."</em> Havertz: <em>"I'm lost for words."</em> In our building it reads differently: <b class="name">Michael</b>'s Paraguay rise from the grave, <b class="name">Matt</b>'s Germany — the spine of his book — vanish on the same afternoon.</p>
+    <h3>👑 Messi's record, Yamal's poise, and a fairy tale still alive</h3>
+    <p><b class="name">Lionel Messi</b> is now the outright all-time World Cup goalscorer on <b>19</b>, after a hat-trick against Algeria, a brace against Austria and a free-kick off the bench against Jordan — Argentina go into tonight's Round of 32 unbeaten, 9 goals scored, and heavy favourites against <b class="team">Cape Verde</b>, who are officially the smallest nation by population ever to reach a men's World Cup knockout stage. It is, per one American outlet, "the best TV show of the summer" — for <b class="name">Divisha</b> and <b class="name">Tim</b>, who between them hold Argentina, it's simply appointment viewing. <b class="name">Michael</b>, still improbably alive after his Paraguay resurrection two editions ago, now has a second miracle to root for: his double Cape Verde share needs the fairy tale to run one more night.</p>
+    <p>In the Golden Boot race, <b class="team">Mbappé</b> has drawn level with Messi on 6 goals and leads on the assist tiebreak; <b class="team">Dembélé</b> announced himself with a hat-trick in France's final group game. But the individual moment of the fortnight belongs to <b>Lamine Yamal</b>, 18, who was named Man of the Match in Spain's 3–0 dismantling of Austria without even scoring — pure ball-carrying, defenders bent around him like he was dribbling through cones. His own verdict afterwards: <em>"Little by little, I'm feeling like myself."</em> The man who just paid Divisha 6.75 for that Spain share, <b class="name">Rohit</b>, will take that as very good value indeed.</p>
 
-    <h3>🇳🇱 Fine margins — Netherlands fall to Morocco</h3>
-    <p>The Round of 32's quieter heartbreak: <b class="team">Netherlands</b> went out to <b class="name">Tim</b>'s Morocco on penalties after a 1–1 that turned on inches. <b class="name">AJ</b>'s double-Dutch dream died against the woodwork — and the office floor logged the exact instant it slipped away:</p>
-    <div class="slackmsg">
-      <div class="av">AJ</div>
-      <div class="body"><span class="who">AJ</span><span class="ts">9:09 AM</span>
-        <div class="txt">Kluivert hit the post 😡</div></div>
-    </div>
-    <p>A post's width from extra time, a post's width from a different bracket. That is the knockout stage: it does not care how good your team is, only where the ball ends up.</p>
+    <h3>🚩 Balogun sees red — and the pundits don't agree</h3>
+    <p>The USA's 2–0 win over Bosnia & Herzegovina — which kept <b class="name">Paulius</b>'s lone live share alive — was overshadowed by <b class="team">Folarin Balogun</b>'s 64th-minute red card for a challenge that injured a Bosnian defender's ankle. The reaction split cleanly down the middle: Mauricio Pochettino called it <em>"never a red card,"</em> Weston McKennie said it was <em>"questionable"</em> given "many other plays like that" went unpunished elsewhere in the tournament, and former Premier League referee Mark Clattenburg agreed the decision was <em>"not consistent with what I've seen the rest of this tournament."</em> ESPN's own referee analyst, by contrast, called the collision "purely accidental." Balogun's ban rules him out of the USA's Round of 16 date with <b class="team">Belgium</b> — a game <b class="name">Pak</b> and <b class="name">Margot</b> will be watching closely on Belgium's behalf.</p>
 
-    <h3>🐐 The fairy tale — Cape Verde, smallest nation ever to reach the knockouts</h3>
-    <p>Population ~525,000, ranked 67th, drawn with Spain and Uruguay — and through. Three group draws (0–0 Spain, a twice-clawed-back 2–2 with Uruguay, 0–0 Saudi Arabia) made <b class="team">Cape Verde</b> <b>"the smallest nation ever to qualify for the World Cup knockout stages."</b> They reward <b class="name">Michael</b> and <b class="name">Divisha</b> — and now stand opposite Messi's Argentina in the last 32.</p>
+    <h3>😤 England grind past DR Congo — Kane does it late, again</h3>
+    <p><b class="team">England</b> needed a Harry Kane-inspired comeback to see off DR Congo 2–1 — nervy, backs-against-the-wall stuff that kept <b class="name">Neil</b>'s double England alive and cost <b class="name">Haydee</b> her DR Congo share. It sets up, four days from now, the single biggest fixture on this office's calendar.</p>
 
-    <h3>😬 The fallen — Türkiye, Tunisia, Uruguay</h3>
-    <p><b class="bad">Türkiye</b>, a pre-tournament dark-horse pick, crashed out having taken <b>62 shots without scoring across their first two games</b> — billed as the most shots without a goal in any two-match span in World Cup history — before a consolation 3–2 over a rotated USA. A grim watch for <b class="name">Mike</b>'s double-Turkey. <b class="bad">Tunisia</b> were branded <b>"the worst team at the 2026 World Cup"</b> (5–1 Sweden, 4–0 Japan, 3–1 Netherlands), their manager the <b>first in World Cup history sacked after matchday one</b> — <b class="name">Josh</b>'s dead double. And <b class="bad">Uruguay</b>, the highest-ranked side to fall in the groups, undone by a Muslera howler against Spain — a top <b class="name">Kerrill</b> had already called, having sold Uruguay near its peak for 6.50. Spare a thought for <b class="team">Haiti</b> too: no goals, goal difference of −11, statistically the tournament's worst.</p>
-
-    <h3>🌟 Who's looking strong</h3>
-    <p><b class="team">France</b> top the pundits' boards — Dembélé in <b>"Ballon d'Or"</b> form, Mbappé <b>"on a mission"</b> — for <b class="name">Kelvin</b> and <b class="name">Giannis</b>. <b class="team">Mexico</b> were perfect: <b>three wins, not a single goal conceded</b>, the home crowd a <b>"12th man,"</b> gilding <b class="name">Divisha</b>'s fortress. <b class="team">Argentina</b> rolled through with Messi scoring in a seventh straight World Cup game (<b class="name">Tim</b>, <b class="name">Dea</b>). <b class="team">Brazil</b> — <b>"the most fun Brazil side in a while"</b> — edged Japan via a late Martinelli winner to carry <b class="name">Elaine</b> and <b class="name">CJ</b> onward. And ESPN's <b>"biggest climbers,"</b> a <b class="team">Colombia</b> branded a <b>"sleeper candidate,"</b> sit doubled-up in <b class="name">Kerrill</b>'s hand — the model's third-favourite for the office crown.</p>
-
-    <h3>😤 …and England, being England</h3>
-    <p>Top of Group L, unbeaten, and watched through gritted teeth. A <b>0–0 with Ghana</b> drew Paul Merson's <b>"back to reality"</b> and a familiar lament about <b>"labored and grim"</b> football; Tuchel, deadpan: <em>"The football becomes so complicated with the appearance of an opponent."</em> The model could not care less about the aesthetics — <b class="name">Neil</b>'s <b class="team">England ×2</b> are its <b>outright title favourites at 20.6%</b>. Pocket aces don't have to be pretty.</p>
+    <h2 class="desk2">🎙️ The one everyone's talking about: Mexico v England, Sunday night at the Azteca</h2>
+    <p class="lede">Confirmed, official, and circled by every desk in world football: <b class="team">Mexico</b> host <b class="team">England</b> in the Round of 16 at the Estadio Azteca, Mexico City — 6pm local Sunday 5 July, which is 1am Monday in the UK. Only the second meeting ever between these two nations; the first was England's 2–0 win at Wembley in 1966, the tournament they went on to win. In the office, it's a straight <b class="name">Neil</b> (double England) v <b class="name">Divisha</b> (single Mexico, plus Giannis's other share) derby, with a great deal riding on ninety minutes at altitude.</p>
+    <p>Thomas Tuchel isn't hiding from the elephant in the stadium: <em>"The altitude will be, of course, a big disadvantage, because we cannot physically adapt to it in four days. It's just impossible… that is just a huge advantage that Mexico will have."</em> He's calling the fixture itself <em>"maybe one of the most beautiful, most exciting fixtures you can have,"</em> and leaning into the hostility: <em>"I'm not sure if the travel will be smooth, if the sleep will be smooth, if there's noise outside the hotel… OK, bring it on."</em> Mexico boss Javier Aguirre — in his last tournament before Rafael Márquez takes over — was blunter still about home advantage: <em>"It is priceless. England was champion playing at home, and never again."</em> Mexico have never lost a World Cup match at the Azteca (7W 3D in 10) and have outscored opponents 8–0 there this tournament, their best-ever start; the counter-curse is that they've lost seven straight Round-of-16 ties across seven World Cups. Bookmakers still make England moneyline favourites (+125 to Mexico's +245) despite all of it. <b class="name">Neil</b> will take that. <b class="name">Divisha</b>, on the back of the fortnight she's had, will fancy her chances of the upset anyway.</p>
   </section>
 <h2 style="color:var(--em);margin-top:30px">📊 Full standings · ranked by total (match points + cash)</h2><div class="grid">
     <div class="card leader">
       <div class="chead">
         <span class="pname">👑 Paulius</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b data-count="23.39">23.39</b></span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b data-count="27.39">27.39</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odmid">8.5%</b><span class="livetag">2 live</span></div>
-      <div class="chips"><span class="chip rose"><span class="fl">🇺🇸</span><span class="nm">USA</span><span class="mult">×2</span><span class="rec">2W 0D 1L</span><span class="pts">4 pts</span></span><span class="chip violet dead"><span class="fl">🇨🇿</span><span class="nm">Czechia</span><span class="mult">×2</span><span class="rec">0W 1D 2L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span><span class="chip emerald dead"><span class="fl">🇺🇿</span><span class="nm">Uzbekistan</span><span class="mult">×2</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span><span class="chip emerald dead"><span class="fl">🇯🇴</span><span class="nm">Jordan</span><span class="mult">×2</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip rose"><span class="fl">🇺🇸</span><span class="nm">USA</span><span class="mult">×2</span><span class="rec">3W 0D 1L</span><span class="pts">8 pts</span></span><span class="chip violet dead"><span class="fl">🇨🇿</span><span class="nm">Czechia</span><span class="mult">×2</span><span class="rec">0W 1D 2L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span><span class="chip emerald dead"><span class="fl">🇺🇿</span><span class="nm">Uzbekistan</span><span class="mult">×2</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span><span class="chip emerald dead"><span class="fl">🇯🇴</span><span class="nm">Jordan</span><span class="mult">×2</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">13</b></div>
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">17</b></div>
         <div class="frow cash"><span>💰 Cash (bank)</span><b>10.39</b></div>
-        <div class="frow sum"><span>13 pts + 10.39 cash</span><b>= 23.39</b></div>
+        <div class="frow sum"><span>17 pts + 10.39 cash</span><b>= 27.39</b></div>
       </div>
     </div>
 
     <div class="card r2">
       <div class="chead">
-        <span class="pname">🥈 Tim</span>
+        <span class="pname">🥈 Divisha</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>26.44</b></span>
+      </div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇦🇷</span><span class="nm">Argentina</span><span class="rec">3W 0D 0L</span><span class="pts pts0">0 pts</span></span><span class="chip amber"><span class="fl">🇲🇽</span><span class="nm">Mexico</span><span class="rec">4W 0D 0L</span><span class="pts">12 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">23</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.44</b></div>
+        <div class="frow sum"><span>23 pts + 3.44 cash</span><b>= 26.44</b></div>
+      </div>
+    </div>
+
+    <div class="card r3">
+      <div class="chead">
+        <span class="pname">🥉 Tim</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>21.85</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">3.6%</b><span class="livetag">3 live</span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">3 live</span></div>
       <div class="chips"><span class="chip amber"><span class="fl">🇦🇷</span><span class="nm">Argentina</span><span class="rec">3W 0D 0L</span><span class="pts">6 pts</span></span><span class="chip rose"><span class="fl">🇲🇦</span><span class="nm">Morocco</span><span class="mult">×2</span><span class="rec">3W 1D 0L</span><span class="pts">14 pts</span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">20</b></div>
@@ -380,13 +400,13 @@
       </div>
     </div>
 
-    <div class="card r3">
+    <div class="card">
       <div class="chead">
-        <span class="pname">🥉 Haydee</span>
+        <span class="pname">#4 Haydee</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>20.60</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odmid">8.8%</b><span class="livetag">4 live</span></div>
-      <div class="chips"><span class="chip rose"><span class="fl">🇪🇬</span><span class="nm">Egypt</span><span class="mult">×2</span><span class="rec">1W 2D 0L</span><span class="pts">8 pts</span></span><span class="chip emerald"><span class="fl">🇨🇩</span><span class="nm">DR Congo</span><span class="mult">×2</span><span class="rec">1W 1D 1L</span><span class="pts">6 pts</span></span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip rose"><span class="fl">🇪🇬</span><span class="nm">Egypt</span><span class="mult">×2</span><span class="rec">1W 2D 0L</span><span class="pts">8 pts</span></span><span class="chip emerald dead"><span class="fl">🇨🇩</span><span class="nm">DR Congo</span><span class="mult">×2</span><span class="rec">1W 1D 2L</span><span class="pts">6 pts <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">15</b></div>
         <div class="frow cash"><span>💰 Cash (bank)</span><b>5.60</b></div>
@@ -396,11 +416,39 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#4 Echo</span>
+        <span class="pname">#5 Giannis</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>19.74</b></span>
+      </div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">1 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇲🇽</span><span class="nm">Mexico</span><span class="rec">4W 0D 0L</span><span class="pts pts0">0 pts</span></span><span class="chip rose dead"><span class="fl">🇦🇹</span><span class="nm">Austria</span><span class="rec">1W 1D 2L</span><span class="pts">3 pts <span class="skull">✝</span></span></span><span class="chip emerald dead"><span class="fl">🇵🇦</span><span class="nm">Panama</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">11</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>8.74</b></div>
+        <div class="frow sum"><span>11 pts + 8.74 cash</span><b>= 19.74</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#6 Pak</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>19.69</b></span>
+      </div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇧🇪</span><span class="nm">Belgium</span><span class="rec">2W 2D 0L</span><span class="pts">6 pts</span></span><span class="chip rose"><span class="fl">🇳🇴</span><span class="nm">Norway</span><span class="rec">3W 0D 1L</span><span class="pts">6 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">12</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>7.69</b></div>
+        <div class="frow sum"><span>12 pts + 7.69 cash</span><b>= 19.69</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#7 Echo</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>19.18</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odmid">6.7%</b><span class="livetag">4 live</span></div>
-      <div class="chips"><span class="chip rose"><span class="fl">🇨🇦</span><span class="nm">Canada</span><span class="mult">×2</span><span class="rec">2W 1D 1L</span><span class="pts">9 pts</span></span><span class="chip violet"><span class="fl">🇩🇿</span><span class="nm">Algeria</span><span class="mult">×2</span><span class="rec">1W 1D 1L</span><span class="pts">6 pts</span></span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip rose"><span class="fl">🇨🇦</span><span class="nm">Canada</span><span class="mult">×2</span><span class="rec">2W 1D 1L</span><span class="pts">9 pts</span></span><span class="chip violet dead"><span class="fl">🇩🇿</span><span class="nm">Algeria</span><span class="mult">×2</span><span class="rec">1W 1D 2L</span><span class="pts">6 pts <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">17</b></div>
         <div class="frow cash"><span>💰 Cash (bank)</span><b>2.18</b></div>
@@ -410,10 +458,10 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#5 Kerrill</span>
+        <span class="pname">#8 Kerrill</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>18.36</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odhi">15.9%</b><span class="livetag">2 live</span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
       <div class="chips"><span class="chip amber"><span class="fl">🇨🇴</span><span class="nm">Colombia</span><span class="mult">×2</span><span class="rec">2W 1D 0L</span><span class="pts">10 pts</span></span><span class="chip emerald dead"><span class="fl">🇨🇼</span><span class="nm">Curaçao</span><span class="rec">0W 1D 2L</span><span class="pts">1 pt <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">11</b></div>
@@ -424,39 +472,81 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#6 Michael</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>17.85</b></span>
+        <span class="pname">#9 Jing</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>18.28</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.3%</b><span class="livetag">3 live</span></div>
-      <div class="chips"><span class="chip violet dead"><span class="fl">🇸🇳</span><span class="nm">Senegal</span><span class="rec">1W 0D 2L</span><span class="pts">2 pts <span class="skull">✝</span></span></span><span class="chip violet"><span class="fl">🇵🇾</span><span class="nm">Paraguay</span><span class="mult">×2</span><span class="rec">2W 1D 1L</span><span class="pts">10 pts</span></span><span class="chip violet dead"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="nm">Scotland</span><span class="rec">1W 0D 2L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span><span class="chip emerald"><span class="fl">🇨🇻</span><span class="nm">Cape Verde</span><span class="rec">0W 3D 0L</span><span class="pts">2 pts</span></span><span class="chip emerald dead"><span class="fl">🇸🇦</span><span class="nm">Saudi Arabia</span><span class="mult">×2</span><span class="rec">0W 2D 1L</span><span class="pts">4 pts <span class="skull">✝</span></span></span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇨🇭</span><span class="nm">Switzerland</span><span class="mult">×2</span><span class="rec">3W 1D 0L</span><span class="pts">13 pts</span></span><span class="chip rose dead"><span class="fl">🇨🇮</span><span class="nm">Ivory Coast</span><span class="mult">×2</span><span class="rec">2W 0D 2L</span><span class="pts">8 pts <span class="skull">✝</span></span></span><span class="chip violet dead"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="nm">Scotland</span><span class="rec">1W 0D 2L</span><span class="pts">2 pts <span class="skull">✝</span></span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">23</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>-4.72</b></div>
+        <div class="frow sum"><span>23 pts + -4.72 cash</span><b>= 18.28</b></div>
+      </div>
+    </div>
+
+    <div class="card out">
+      <div class="chead">
+        <span class="pname">#10 Kelvin</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>17.91</b></span>
+      </div>
+      <div class="statusline"><span class="statuspill dead">☠ mathematically out</span><span class="livetag out">0 live</span></div>
+      <div class="chips"><span class="chip rose dead"><span class="fl">🇪🇨</span><span class="nm">Ecuador</span><span class="rec">1W 1D 2L</span><span class="pts">3 pts <span class="skull">✝</span></span></span><span class="chip rose dead"><span class="fl">🇭🇷</span><span class="nm">Croatia</span><span class="rec">2W 0D 2L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span><span class="chip rose dead"><span class="fl">🇯🇵</span><span class="nm">Japan</span><span class="rec">1W 2D 1L</span><span class="pts">4 pts <span class="skull">✝</span></span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">15</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>2.91</b></div>
+        <div class="frow sum"><span>15 pts + 2.91 cash</span><b>= 17.91</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#11 Neil</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>17.76</b></span>
+      </div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="nm">England</span><span class="mult">×2</span><span class="rec">3W 1D 0L</span><span class="pts">14 pts</span></span></div>
+      <div class="cfoot">
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">14</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.76</b></div>
+        <div class="frow sum"><span>14 pts + 3.76 cash</span><b>= 17.76</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chead">
+        <span class="pname">#12 Michael</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>17.27</b></span>
+      </div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">4 live</span></div>
+      <div class="chips"><span class="chip violet dead"><span class="fl">🇸🇳</span><span class="nm">Senegal</span><span class="rec">1W 0D 3L</span><span class="pts">2 pts <span class="skull">✝</span></span></span><span class="chip violet"><span class="fl">🇵🇾</span><span class="nm">Paraguay</span><span class="mult">×2</span><span class="rec">2W 1D 1L</span><span class="pts">10 pts</span></span><span class="chip violet dead"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="nm">Scotland</span><span class="rec">1W 0D 2L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span><span class="chip emerald"><span class="fl">🇨🇻</span><span class="nm">Cape Verde</span><span class="mult">×2</span><span class="rec">0W 3D 0L</span><span class="pts">2 pts</span></span><span class="chip emerald dead"><span class="fl">🇸🇦</span><span class="nm">Saudi Arabia</span><span class="mult">×2</span><span class="rec">0W 2D 1L</span><span class="pts">4 pts <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">18</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>-0.15</b></div>
-        <div class="frow sum"><span>18 pts + -0.15 cash</span><b>= 17.85</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>-0.73</b></div>
+        <div class="frow sum"><span>18 pts + -0.73 cash</span><b>= 17.27</b></div>
       </div>
     </div>
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#7 Divisha</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>17.21</b></span>
+        <span class="pname">#13 Margot</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>17.25</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odhi">14.1%</b><span class="livetag">4 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇪🇸</span><span class="nm">Spain</span><span class="rec">2W 1D 0L</span><span class="pts">5 pts</span></span><span class="chip amber"><span class="fl">🇲🇽</span><span class="nm">Mexico</span><span class="mult">×2</span><span class="rec">3W 0D 0L</span><span class="pts">8 pts</span></span><span class="chip emerald"><span class="fl">🇨🇻</span><span class="nm">Cape Verde</span><span class="rec">0W 3D 0L</span><span class="pts">4 pts</span></span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇧🇪</span><span class="nm">Belgium</span><span class="rec">2W 2D 0L</span><span class="pts">6 pts</span></span><span class="chip rose dead"><span class="fl">🇪🇨</span><span class="nm">Ecuador</span><span class="rec">1W 1D 2L</span><span class="pts">3 pts <span class="skull">✝</span></span></span><span class="chip violet"><span class="fl">🇦🇺</span><span class="nm">Australia</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip emerald dead"><span class="fl">🇨🇼</span><span class="nm">Curaçao</span><span class="rec">0W 1D 2L</span><span class="pts">1 pt <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">19</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>-1.79</b></div>
-        <div class="frow sum"><span>19 pts + -1.79 cash</span><b>= 17.21</b></div>
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">13</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>4.25</b></div>
+        <div class="frow sum"><span>13 pts + 4.25 cash</span><b>= 17.25</b></div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card out">
       <div class="chead">
-        <span class="pname">#8 Elaine</span>
+        <span class="pname">#14 Elaine</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>16.69</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.9%</b><span class="livetag">4 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇧🇷</span><span class="nm">Brazil</span><span class="rec">3W 1D 0L</span><span class="pts">7 pts</span></span><span class="chip rose"><span class="fl">🇭🇷</span><span class="nm">Croatia</span><span class="rec">2W 0D 1L</span><span class="pts">4 pts</span></span><span class="chip violet"><span class="fl">🇸🇪</span><span class="nm">Sweden</span><span class="mult">×2</span><span class="rec">1W 1D 1L</span><span class="pts">6 pts</span></span></div>
+      <div class="statusline"><span class="statuspill dead">☠ mathematically out</span><span class="livetag">1 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇧🇷</span><span class="nm">Brazil</span><span class="rec">3W 1D 0L</span><span class="pts">7 pts</span></span><span class="chip rose dead"><span class="fl">🇭🇷</span><span class="nm">Croatia</span><span class="rec">2W 0D 2L</span><span class="pts">4 pts <span class="skull">✝</span></span></span><span class="chip violet dead"><span class="fl">🇸🇪</span><span class="nm">Sweden</span><span class="mult">×2</span><span class="rec">1W 1D 2L</span><span class="pts">6 pts <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">17</b></div>
         <div class="frow cash"><span>💰 Cash (bank)</span><b>-0.31</b></div>
@@ -466,11 +556,11 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#9 CJ</span>
+        <span class="pname">#15 CJ</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>16.60</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.0%</b><span class="livetag">3 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇧🇷</span><span class="nm">Brazil</span><span class="rec">3W 1D 0L</span><span class="pts">7 pts</span></span><span class="chip rose"><span class="fl">🇦🇹</span><span class="nm">Austria</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip violet"><span class="fl">🇬🇭</span><span class="nm">Ghana</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip emerald dead"><span class="fl">🇳🇿</span><span class="nm">New Zealand</span><span class="rec">0W 1D 2L</span><span class="pts">1 pt <span class="skull">✝</span></span></span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇧🇷</span><span class="nm">Brazil</span><span class="rec">3W 1D 0L</span><span class="pts">7 pts</span></span><span class="chip rose dead"><span class="fl">🇦🇹</span><span class="nm">Austria</span><span class="rec">1W 1D 2L</span><span class="pts">3 pts <span class="skull">✝</span></span></span><span class="chip violet"><span class="fl">🇬🇭</span><span class="nm">Ghana</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip emerald dead"><span class="fl">🇳🇿</span><span class="nm">New Zealand</span><span class="rec">0W 1D 2L</span><span class="pts">1 pt <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">14</b></div>
         <div class="frow cash"><span>💰 Cash (bank)</span><b>2.60</b></div>
@@ -480,66 +570,24 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#10 Dea</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>15.93</b></span>
+        <span class="pname">#16 Dea</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>16.03</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.0%</b><span class="livetag">2 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇦🇷</span><span class="nm">Argentina</span><span class="rec">3W 0D 0L</span><span class="pts">6 pts</span></span><span class="chip rose"><span class="fl">🇭🇷</span><span class="nm">Croatia</span><span class="rec">2W 0D 1L</span><span class="pts">4 pts</span></span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇫🇷</span><span class="nm">France</span><span class="mult">×2</span><span class="rec">4W 0D 0L</span><span class="pts pts0">0 pts</span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">11</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>4.93</b></div>
-        <div class="frow sum"><span>11 pts + 4.93 cash</span><b>= 15.93</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>5.03</b></div>
+        <div class="frow sum"><span>11 pts + 5.03 cash</span><b>= 16.03</b></div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card out">
       <div class="chead">
-        <span class="pname">#11 Kelvin</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>15.91</b></span>
-      </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.0%</b><span class="livetag">2 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇫🇷</span><span class="nm">France</span><span class="rec">3W 0D 0L</span><span class="pts">6 pts</span></span><span class="chip rose"><span class="fl">🇪🇨</span><span class="nm">Ecuador</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip rose dead"><span class="fl">🇯🇵</span><span class="nm">Japan</span><span class="rec">1W 2D 1L</span><span class="pts">4 pts <span class="skull">✝</span></span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">13</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>2.91</b></div>
-        <div class="frow sum"><span>13 pts + 2.91 cash</span><b>= 15.91</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#12 Giannis</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>15.74</b></span>
-      </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.0%</b><span class="livetag">2 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇫🇷</span><span class="nm">France</span><span class="rec">3W 0D 0L</span><span class="pts">6 pts</span></span><span class="chip rose"><span class="fl">🇦🇹</span><span class="nm">Austria</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip emerald dead"><span class="fl">🇵🇦</span><span class="nm">Panama</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">9</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>6.74</b></div>
-        <div class="frow sum"><span>9 pts + 6.74 cash</span><b>= 15.74</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#13 Pak</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>15.69</b></span>
-      </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.0%</b><span class="livetag">2 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇧🇪</span><span class="nm">Belgium</span><span class="rec">1W 2D 0L</span><span class="pts">4 pts</span></span><span class="chip rose"><span class="fl">🇳🇴</span><span class="nm">Norway</span><span class="rec">2W 0D 1L</span><span class="pts">4 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">8</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>7.69</b></div>
-        <div class="frow sum"><span>8 pts + 7.69 cash</span><b>= 15.69</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#14 Matt</span>
+        <span class="pname">#17 Matt</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>15.52</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.0%</b><span class="livetag out">0 live</span></div>
+      <div class="statusline"><span class="statuspill dead">☠ mathematically out</span><span class="livetag out">0 live</span></div>
       <div class="chips"><span class="chip amber dead"><span class="fl">🇩🇪</span><span class="nm">Germany</span><span class="rec">2W 0D 2L</span><span class="pts">4 pts <span class="skull">✝</span></span></span><span class="chip rose dead"><span class="fl">🇯🇵</span><span class="nm">Japan</span><span class="rec">1W 2D 1L</span><span class="pts">4 pts <span class="skull">✝</span></span></span><span class="chip violet dead"><span class="fl">🇿🇦</span><span class="nm">South Africa</span><span class="rec">1W 1D 2L</span><span class="pts">3 pts <span class="skull">✝</span></span></span><span class="chip emerald dead"><span class="fl">🇳🇿</span><span class="nm">New Zealand</span><span class="rec">0W 1D 2L</span><span class="pts">1 pt <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">12</b></div>
@@ -548,13 +596,13 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card out">
       <div class="chead">
-        <span class="pname">#15 May</span>
+        <span class="pname">#18 May</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>15.26</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.7%</b><span class="livetag">2 live</span></div>
-      <div class="chips"><span class="chip amber dead"><span class="fl">🇩🇪</span><span class="nm">Germany</span><span class="rec">2W 0D 2L</span><span class="pts">4 pts <span class="skull">✝</span></span></span><span class="chip violet"><span class="fl">🇧🇦</span><span class="nm">Bosnia &amp; H.</span><span class="mult">×2</span><span class="rec">1W 1D 1L</span><span class="pts">6 pts</span></span></div>
+      <div class="statusline"><span class="statuspill dead">☠ mathematically out</span><span class="livetag out">0 live</span></div>
+      <div class="chips"><span class="chip amber dead"><span class="fl">🇩🇪</span><span class="nm">Germany</span><span class="rec">2W 0D 2L</span><span class="pts">4 pts <span class="skull">✝</span></span></span><span class="chip violet dead"><span class="fl">🇧🇦</span><span class="nm">Bosnia &amp; H.</span><span class="mult">×2</span><span class="rec">1W 1D 2L</span><span class="pts">6 pts <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">10</b></div>
         <div class="frow cash"><span>💰 Cash (bank)</span><b>5.26</b></div>
@@ -564,52 +612,24 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#16 Margot</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>15.25</b></span>
+        <span class="pname">#19 Kwan</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>15.10</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.1%</b><span class="livetag">3 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇧🇪</span><span class="nm">Belgium</span><span class="rec">1W 2D 0L</span><span class="pts">4 pts</span></span><span class="chip rose"><span class="fl">🇪🇨</span><span class="nm">Ecuador</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip violet"><span class="fl">🇦🇺</span><span class="nm">Australia</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip emerald dead"><span class="fl">🇨🇼</span><span class="nm">Curaçao</span><span class="rec">0W 1D 2L</span><span class="pts">1 pt <span class="skull">✝</span></span></span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">2 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇵🇹</span><span class="nm">Portugal</span><span class="mult">×2</span><span class="rec">2W 2D 0L</span><span class="pts">12 pts</span></span></div>
       <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">11</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>4.25</b></div>
-        <div class="frow sum"><span>11 pts + 4.25 cash</span><b>= 15.25</b></div>
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">12</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.10</b></div>
+        <div class="frow sum"><span>12 pts + 3.10 cash</span><b>= 15.10</b></div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card out">
       <div class="chead">
-        <span class="pname">#17 Jing</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>14.28</b></span>
-      </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odhi">13.3%</b><span class="livetag">4 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇨🇭</span><span class="nm">Switzerland</span><span class="mult">×2</span><span class="rec">2W 1D 0L</span><span class="pts">9 pts</span></span><span class="chip rose"><span class="fl">🇨🇮</span><span class="nm">Ivory Coast</span><span class="mult">×2</span><span class="rec">2W 0D 1L</span><span class="pts">8 pts</span></span><span class="chip violet dead"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="nm">Scotland</span><span class="rec">1W 0D 2L</span><span class="pts">2 pts <span class="skull">✝</span></span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">19</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>-4.72</b></div>
-        <div class="frow sum"><span>19 pts + -4.72 cash</span><b>= 14.28</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#18 Neil</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>13.76</b></span>
-      </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odhi">20.6%</b><span class="livetag">2 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="nm">England</span><span class="mult">×2</span><span class="rec">2W 1D 0L</span><span class="pts">10 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">10</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.76</b></div>
-        <div class="frow sum"><span>10 pts + 3.76 cash</span><b>= 13.76</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">#19 AJ</span>
+        <span class="pname">#20 AJ</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>13.47</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.0%</b><span class="livetag out">0 live</span></div>
+      <div class="statusline"><span class="statuspill dead">☠ mathematically out</span><span class="livetag out">0 live</span></div>
       <div class="chips"><span class="chip amber dead"><span class="fl">🇳🇱</span><span class="nm">Netherlands</span><span class="mult">×2</span><span class="rec">2W 1D 1L</span><span class="pts">10 pts <span class="skull">✝</span></span></span><span class="chip emerald dead"><span class="fl">🇭🇹</span><span class="nm">Haiti</span><span class="mult">×2</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">10</b></div>
@@ -618,13 +638,13 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card out">
       <div class="chead">
-        <span class="pname">#20 Josh</span>
+        <span class="pname">#21 Josh</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>12.98</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.1%</b><span class="livetag">3 live</span></div>
-      <div class="chips"><span class="chip violet"><span class="fl">🇮🇷</span><span class="nm">Iran</span><span class="mult">×2</span><span class="rec">0W 3D 0L</span><span class="pts">6 pts</span></span><span class="chip violet"><span class="fl">🇬🇭</span><span class="nm">Ghana</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip emerald dead"><span class="fl">🇹🇳</span><span class="nm">Tunisia</span><span class="mult">×2</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span></div>
+      <div class="statusline"><span class="statuspill dead">☠ mathematically out</span><span class="livetag">1 live</span></div>
+      <div class="chips"><span class="chip violet dead"><span class="fl">🇮🇷</span><span class="nm">Iran</span><span class="mult">×2</span><span class="rec">0W 3D 0L</span><span class="pts">6 pts <span class="skull">✝</span></span></span><span class="chip violet"><span class="fl">🇬🇭</span><span class="nm">Ghana</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip emerald dead"><span class="fl">🇹🇳</span><span class="nm">Tunisia</span><span class="mult">×2</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">9</b></div>
         <div class="frow cash"><span>💰 Cash (bank)</span><b>3.98</b></div>
@@ -632,26 +652,12 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card out">
       <div class="chead">
-        <span class="pname">=#21 Rohit</span>
+        <span class="pname">#22 Mike</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>12.78</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.0%</b><span class="livetag">2 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇪🇸</span><span class="nm">Spain</span><span class="rec">2W 1D 0L</span><span class="pts">5 pts</span></span><span class="chip rose"><span class="fl">🇳🇴</span><span class="nm">Norway</span><span class="rec">2W 0D 1L</span><span class="pts">4 pts</span></span></div>
-      <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">9</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.78</b></div>
-        <div class="frow sum"><span>9 pts + 3.78 cash</span><b>= 12.78</b></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="chead">
-        <span class="pname">=#21 Mike</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>12.78</b></span>
-      </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.0%</b><span class="livetag out">0 live</span></div>
+      <div class="statusline"><span class="statuspill dead">☠ mathematically out</span><span class="livetag out">0 live</span></div>
       <div class="chips"><span class="chip rose dead"><span class="fl">🇹🇷</span><span class="nm">Turkey</span><span class="mult">×2</span><span class="rec">1W 0D 2L</span><span class="pts">4 pts <span class="skull">✝</span></span></span><span class="chip violet dead"><span class="fl">🇿🇦</span><span class="nm">South Africa</span><span class="rec">1W 1D 2L</span><span class="pts">3 pts <span class="skull">✝</span></span></span><span class="chip emerald dead"><span class="fl">🇶🇦</span><span class="nm">Qatar</span><span class="mult">×2</span><span class="rec">0W 1D 2L</span><span class="pts">2 pts <span class="skull">✝</span></span></span><span class="chip emerald dead"><span class="fl">🇮🇶</span><span class="nm">Iraq</span><span class="mult">×2</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">9</b></div>
@@ -662,31 +668,49 @@
 
     <div class="card">
       <div class="chead">
-        <span class="pname">#23 Kwan</span>
-        <span class="ptot"><span class="tlabel">TOTAL</span><b>11.10</b></span>
+        <span class="pname">#23 Rohit</span>
+        <span class="ptot"><span class="tlabel">TOTAL</span><b>12.03</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odmid">6.4%</b><span class="livetag">2 live</span></div>
-      <div class="chips"><span class="chip amber"><span class="fl">🇵🇹</span><span class="nm">Portugal</span><span class="mult">×2</span><span class="rec">1W 2D 0L</span><span class="pts">8 pts</span></span></div>
+      <div class="statusline"><span class="statuspill alive">🟢 still alive</span><span class="livetag">3 live</span></div>
+      <div class="chips"><span class="chip amber"><span class="fl">🇪🇸</span><span class="nm">Spain</span><span class="mult">×2</span><span class="rec">3W 1D 0L</span><span class="pts">9 pts</span></span><span class="chip rose"><span class="fl">🇳🇴</span><span class="nm">Norway</span><span class="rec">3W 0D 1L</span><span class="pts">6 pts</span></span></div>
       <div class="cfoot">
-        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">8</b></div>
-        <div class="frow cash"><span>💰 Cash (bank)</span><b>3.10</b></div>
-        <div class="frow sum"><span>8 pts + 3.10 cash</span><b>= 11.10</b></div>
+        <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">15</b></div>
+        <div class="frow cash"><span>💰 Cash (bank)</span><b>-2.97</b></div>
+        <div class="frow sum"><span>15 pts + -2.97 cash</span><b>= 12.03</b></div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card out">
       <div class="chead">
         <span class="pname">#24 Simon</span>
         <span class="ptot"><span class="tlabel">TOTAL</span><b>5.30</b></span>
       </div>
-      <div class="oddline"><span class="oddlab">title odds</span><b class="odlo">0.0%</b><span class="livetag">1 live</span></div>
-      <div class="chips"><span class="chip rose dead"><span class="fl">🇺🇾</span><span class="nm">Uruguay</span><span class="mult">×2</span><span class="rec">0W 2D 1L</span><span class="pts">4 pts <span class="skull">✝</span></span></span><span class="chip violet dead"><span class="fl">🇰🇷</span><span class="nm">South Korea</span><span class="mult">×2</span><span class="rec">1W 0D 2L</span><span class="pts">2 pts <span class="skull">✝</span></span></span><span class="chip violet dead"><span class="fl">🇸🇳</span><span class="nm">Senegal</span><span class="rec">1W 0D 2L</span><span class="pts">2 pts <span class="skull">✝</span></span></span><span class="chip violet"><span class="fl">🇦🇺</span><span class="nm">Australia</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip emerald dead"><span class="fl">🇵🇦</span><span class="nm">Panama</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span></div>
+      <div class="statusline"><span class="statuspill dead">☠ mathematically out</span><span class="livetag">1 live</span></div>
+      <div class="chips"><span class="chip rose dead"><span class="fl">🇺🇾</span><span class="nm">Uruguay</span><span class="mult">×2</span><span class="rec">0W 2D 1L</span><span class="pts">4 pts <span class="skull">✝</span></span></span><span class="chip violet dead"><span class="fl">🇰🇷</span><span class="nm">South Korea</span><span class="mult">×2</span><span class="rec">1W 0D 2L</span><span class="pts">2 pts <span class="skull">✝</span></span></span><span class="chip violet dead"><span class="fl">🇸🇳</span><span class="nm">Senegal</span><span class="rec">1W 0D 3L</span><span class="pts">2 pts <span class="skull">✝</span></span></span><span class="chip violet"><span class="fl">🇦🇺</span><span class="nm">Australia</span><span class="rec">1W 1D 1L</span><span class="pts">3 pts</span></span><span class="chip emerald dead"><span class="fl">🇵🇦</span><span class="nm">Panama</span><span class="rec">0W 0D 3L</span><span class="pts pts0">0 pts <span class="skull">✝</span></span></span></div>
       <div class="cfoot">
         <div class="frow"><span class="mp">⚽ Match points</span><b class="mpv">12</b></div>
         <div class="frow cash"><span>💰 Cash (bank)</span><b>-6.70</b></div>
         <div class="frow sum"><span>12 pts + -6.70 cash</span><b>= 5.30</b></div>
       </div>
-    </div></div><h2 style="color:var(--em)">⚽ Results · most recent first</h2><ul class='results'><li><span class="match"><span class="t">🇳🇱 Netherlands</span>
+    </div></div><h2 style="color:var(--em)">⚽ Results · most recent first</h2><ul class='results'><li><span class="match"><span class="t">🇨🇭 Switzerland</span>
+        <span class="sc">2–0</span><span class="t">🇩🇿 Algeria</span></span>
+        <span class="meta"><span class="win">Switzerland +2</span><span class="rnd ko">Round of 32</span></span></li><li><span class="match"><span class="t">🇵🇹 Portugal</span>
+        <span class="sc">2–1</span><span class="t">🇭🇷 Croatia</span></span>
+        <span class="meta"><span class="win">Portugal +2</span><span class="rnd ko">Round of 32</span></span></li><li><span class="match"><span class="t">🇪🇸 Spain</span>
+        <span class="sc">3–0</span><span class="t">🇦🇹 Austria</span></span>
+        <span class="meta"><span class="win">Spain +2</span><span class="rnd ko">Round of 32</span></span></li><li><span class="match"><span class="t">🇺🇸 USA</span>
+        <span class="sc">2–0</span><span class="t">🇧🇦 Bosnia &amp; H.</span></span>
+        <span class="meta"><span class="win">USA +2</span><span class="rnd ko">Round of 32</span></span></li><li><span class="match"><span class="t">🇧🇪 Belgium</span>
+        <span class="sc">3–2</span><span class="t">🇸🇳 Senegal</span></span>
+        <span class="meta"><span class="win">Belgium +2</span><span class="rnd ko">Round of 32</span></span></li><li><span class="match"><span class="t">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</span>
+        <span class="sc">2–1</span><span class="t">🇨🇩 DR Congo</span></span>
+        <span class="meta"><span class="win">England +2</span><span class="rnd ko">Round of 32</span></span></li><li><span class="match"><span class="t">🇲🇽 Mexico</span>
+        <span class="sc">2–0</span><span class="t">🇪🇨 Ecuador</span></span>
+        <span class="meta"><span class="win">Mexico +2</span><span class="rnd ko">Round of 32</span></span></li><li><span class="match"><span class="t">🇫🇷 France</span>
+        <span class="sc">3–0</span><span class="t">🇸🇪 Sweden</span></span>
+        <span class="meta"><span class="win">France +2</span><span class="rnd ko">Round of 32</span></span></li><li><span class="match"><span class="t">🇨🇮 Ivory Coast</span>
+        <span class="sc">1–2</span><span class="t">🇳🇴 Norway</span></span>
+        <span class="meta"><span class="win">Norway +2</span><span class="rnd ko">Round of 32</span></span></li><li><span class="match"><span class="t">🇳🇱 Netherlands</span>
         <span class="sc">1–1</span><span class="t">🇲🇦 Morocco</span></span>
         <span class="meta"><span class="win">Morocco +2</span><span class="rnd ko">Round of 32</span></span></li><li><span class="match"><span class="t">🇩🇪 Germany</span>
         <span class="sc">1–1</span><span class="t">🇵🇾 Paraguay</span></span>
@@ -840,8 +864,9 @@
         <span class="sc">2–0</span><span class="t">🇿🇦 South Africa</span></span>
         <span class="meta"><span class="win">Mexico +2</span><span class="rnd">Group</span></span></li></ul>
   <footer>
-    Special edition auto-generated by <b>_king_report.py</b> from the shared <b>trades.txt</b> ledger. Standings, the bracket and the title-race simulation update from the ledger; the commentary, interview and match report are hand-written for this edition.
-    <br><br><b>Title-race model:</b> 200,000-run Monte-Carlo over the remaining knockout bracket. Each tie is decided by a logistic on the two teams' pre-tournament expected value (the same EV used to seed the draw); every knockout win banks +2 per share to the team's current holder. It is a toy model — directional, not gospel — and assumes no further trades. <b>Bracket:</b> Groups A–L per the real 2026 draw (which the ledger's group results match); Round of 32 per the official FIFA template, with the four played ties confirming it. Third-place-fed ties (M77/79/82/85) use the FIFA allocation for the qualifying set and are marked "proj" until played.
+    Special edition auto-generated by <b>_king_report.py</b> from the shared <b>trades.txt</b> ledger. Standings, the bracket and the Graveyard update from the ledger; the commentary is hand-written for this edition.
+    <br><br><b>The Graveyard, methodology:</b> no simulation. A manager's ceiling = current total (cash + banked points, both fixed since no further trades are assumed) + 2 points for every knockout round still winnable by every live share they hold (5 rounds if a team's Round-of-32 tie hasn't been played, 4 if it's already through). A manager is "out" iff their ceiling is below the current leader's total — a number that, since points only ever get banked and never clawed back, is a hard, provable floor. "Died at" event = replaying the real match calendar with today's final portfolio held throughout, and finding the first result after which that ceiling permanently drops below the floor.
+    <br><b>Bracket:</b> Groups A–L per the real 2026 draw (which the ledger's group results match); Round of 32 per the real, confirmed bracket, corrected this edition against the actual live tournament. Round of 16 pairings are the confirmed real draw.
     <br>Flag emoji may render as country codes on some Windows/Chromium builds — not a bug.
   </footer>
 </div>
@@ -860,11 +885,40 @@
     });
   }
   document.querySelectorAll('[data-count]').forEach(countUp);
-  if(rm) return;
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('reveal-in'); io.unobserve(en.target);} });
-  },{rootMargin:'0px 0px -4% 0px',threshold:0});
-  document.querySelectorAll('.report, .card, .tile').forEach(function(el){ io.observe(el); });
+  if(!rm){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('reveal-in'); io.unobserve(en.target);} });
+    },{rootMargin:'0px 0px -4% 0px',threshold:0});
+    document.querySelectorAll('.report, .card, .tile').forEach(function(el){ io.observe(el); });
+  }
+
+  var graves = document.querySelectorAll('.grave');
+  var counter = document.getElementById('gcount');
+  var total = graves.length;
+  function updateCount(){
+    if(!counter) return;
+    var open = document.querySelectorAll('.grave.open').length;
+    counter.textContent = open + ' / ' + total + ' exhumed';
+  }
+  graves.forEach(function(g){
+    g.addEventListener('click', function(){
+      var isOpen = g.classList.toggle('open');
+      g.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      updateCount();
+    });
+  });
+  var digall = document.getElementById('digall');
+  if(digall){
+    digall.addEventListener('click', function(){
+      var anyClosed = document.querySelectorAll('.grave:not(.open)').length > 0;
+      graves.forEach(function(g){
+        g.classList.toggle('open', anyClosed);
+        g.setAttribute('aria-expanded', anyClosed ? 'true' : 'false');
+      });
+      digall.textContent = anyClosed ? '⚰ Bury them again' : '⛏ Exhume everyone';
+      updateCount();
+    });
+  }
 })();
 </script>
 </body></html>
